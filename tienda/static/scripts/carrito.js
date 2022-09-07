@@ -1,7 +1,20 @@
-
+  
 let carrito = []
 
 
+function agregarProducto(){
+  const itemNombre = document.getElementsByClassName('.nombre').textContent;
+  const itemPrecio = document.getElementsByClassName('.precio').textContent;
+  
+  var newItem = {
+    nombre: itemNombre,
+    precio: itemPrecio,
+    cantidad: 1
+  }
+
+  carrito.push(newItem);
+  console.log(carrito);
+}
 //Carrito código guía
 
 // const Clickbutton = document.querySelectorAll('.button')
