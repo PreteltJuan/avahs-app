@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/base-secciones.css' %}" />
+{% endblock %} 
+
+{% block body %}
+<main>
+  <div class="main-header">
+    <h2>{% block categoria %}{% endblock %} </h2>
+    <span>{% block categoria-texto %}{% endblock %}</span>
+  </div>
+  <div class="container">
+    <div class="content">
+      <div class="content-header">
+        <span>{% block articulos-encontrado %}{% endblock %} artículos encontrados</span>
+        <select class="ordenar-select">
+          <option value="date">Ordenar por los últimos</option>
+          <option value="price" selected="selected">Ordenar por precio: bajo a alto</option>
+          <option value="price-desc">Ordenar por precio: alto a bajo</option>
+        </select>
+      </div>
+      
+      <div class="clothescontainer">
+        {% block productos %}
+        {% endblock %} 
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

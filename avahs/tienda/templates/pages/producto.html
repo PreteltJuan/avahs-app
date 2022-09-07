@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block titulo %} Novedades {% endblock%} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/producto.css' %}" />
+{% endblock %} 
+
+{% block body %}
+
+  <div class="main-header">
+    <!-- <div class="content-header">
+      <span>Home>Novedades>Elemento</span>
+    </div> -->
+  </div>
+  <div class="container">
+    <div class="content">
+      <div class="image-product">
+        <img src="{{ producto.imagen.url }}" >
+      </div>
+      <div class="product-info">
+        <span class="nombre">{{ producto.nombre }}</span>
+        <span class="precio">${{ producto.precio }}</span>
+        <span class="disponibilidad">Solo quedan 1 disponibles</span>
+        <a href="/app/carrito/{{ producto.nombre }}">Añadir al carrito</a>
+        {%if producto.descripcion %}
+          <p class="descripcion">{{ producto.descripcion }}</p>
+        {%endif%}
+        
+      </div>
+    </div>
+    <div class="recomendaciones">
+      
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base-secciones.html" %} 
+
+
+{% load static %} 
+
+{% block titulo %} Tendencias {% endblock%} 
+
+{% block categoria %} Tendencias {% endblock %}
+
+{% block categoria-texto %} Dale una mirada a los productos que están de moda{% endblock %}
+
+{% block productos %}
+
+<div class="card">
+    <img src="{% static "images/products/lampara1.jpg.webp" %}" alt="">
+    <div class="info">
+      <p class="name">sobremesa estudio blanco</p>
+      <p class="precio">$52.000</p>
+      <p class="detalle">Agotado</p>
+    </div>
+  </div> 
+{% endblock %}

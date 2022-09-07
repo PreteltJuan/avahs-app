@@ -1,0 +1,33 @@
+{% extends "base-secciones.html" %} 
+
+
+{% load static %} 
+
+{% block titulo %} Descuentos {% endblock%} 
+
+{% block categoria %} Descuentos {% endblock %}
+
+{% block categoria-texto %}No te pierdas ninguno de nuestros descuentos{% endblock %}
+
+{% block articulos-encontrado %} {{ items }}{% endblock %} 
+
+{% block productos %}
+  {% for p in lista_productos%}
+    <a href="/app/producto/{{ p.nombre }}">
+      <div onclick="mostrarProducto" class="card">
+        
+        {%if p.imagen %}
+          <img src="{{ p.imagen.url }}" alt="">
+        {%endif%}
+        <div class="info">
+          <p class="name">{{p.nombre}}</p>
+          <p class="precio">${{p.precio}}</p>
+        </div>
+      </div>
+    </a>
+
+{% endfor%}
+
+
+{% endblock %}
+

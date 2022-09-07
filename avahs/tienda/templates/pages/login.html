@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %} Avahs {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %} 
+{% block body %} 
+    <div class="container">
+        <div class="content">
+            <div class="content-header">
+                <p>Disfruta de Avahs en toda su esencia, crea tus listas de deseos y conoce nuestras novedades antes que nadie.</p>
+               
+            </div>
+            <div class="content-middle">
+                <h1>
+                    Iniciar sesión
+                </h1>
+                <form action="" method="">
+                    <div class="form-content">
+                        <div class="contenedor-input">
+                            <label>
+                                Usuario *
+                            </label>
+                            <input type="text" required>
+                        </div>
+                        <div class="contenedor-input">
+                            <label>
+                                Contraseña *
+                            </label>
+                            <input type="password" required>
+                        </div>
+                        <input type="submit" class="button " value="Iniciar">
+    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

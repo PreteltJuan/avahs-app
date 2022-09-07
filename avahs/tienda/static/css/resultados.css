@@ -1,0 +1,28 @@
+
+.main-header{
+    margin: 56px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-header .content{
+    width: 65%;
+    display: flex;
+    justify-content:flex-start;
+}
+
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 120px 0px;
+}
+
+
+.content{
+    width: 65%;
+    display: flex;
+    justify-content: flex-start;
+}

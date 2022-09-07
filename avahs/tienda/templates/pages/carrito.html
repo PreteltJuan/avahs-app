@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %} Avahs {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/carrito.css' %}" />
+{% endblock %} 
+{% block body %} 
+<main>
+
+    <div class="container">
+        <div class="content">
+            <div class="content-header">
+                <p>{{ producto.nombre }} se ha agregado a tu carrito</p>
+                <a href="http://">Seguir comprando</a>
+            </div>
+            <div class="content-middle">
+                <table class="tabla">
+                    <tr>
+                      <th>Producto</th>
+                      <th>Precio</th>
+                      <th>Cantidad</th>
+                      <th>Subtotal</th>
+                    </tr>
+                    <tr>
+                      <td>{{ producto.nombre }}</td>
+                      <td>$34000</td>
+                      <td><input type="number" step="1" min="0" max="10" value="1" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
+                      <td>$34000</td>
+                    </tr>  
+                    <tr>
+                        <td>Blusa roja</td>
+                        <td>$34000</td>
+                        <td><input type="number" step="1" min="0" max="10" value="1" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
+                        <td>$34000</td>
+                      </tr>            
+                  </table>
+                <div class="actualizar-carrito-container">
+                    <button disabled="disabled">Actualizar carrito</button>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div class="content">
+                    <div class="content-bottom-title">
+                        <span>Total del carrito</span>
+                    </div>
+                    <div class="tabla-container">
+                        <table class="tabla">
+                            <tr>
+                                <td>SubTotal</td>
+                                <td>34000</td>
+                              </tr>  
+                              <tr>
+                                  <td>Envío</td>
+                                  <td>$12000</td>
+                                </tr>   
+                                <tr>
+                                    <td>Total</td>
+                                    <td>$46000</td>
+                                  </tr>   
+                        </table>
+                    </div>
+                    <a href="http://">Finalizar compra</a>
+                </div>
+            </div>        
+        </div>
+    </div>
+</main>
+{% endblock %}
