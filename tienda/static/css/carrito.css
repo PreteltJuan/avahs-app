@@ -177,6 +177,12 @@ main{
     align-self: center;
 }
 
+
+.eliminarProducto{
+    color: #3e5264;
+    text-decoration: none;
+}
+
 @media  (max-width: 750px) {
 
     .container{

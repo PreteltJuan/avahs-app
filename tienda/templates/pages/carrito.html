@@ -13,7 +13,10 @@
         <div class="content">
             <div class="content-header">
                 {% if request.session.productoAgregado %}
-                    <p>{{ request.session.ultimoProducto }} se ha agregado a tu carrito.</p>
+                    <p>{{ request.session.ultimoProductoAgregado }} se ha agregado a tu carrito.</p>
+                    <a href="{% url 'home'  %} " >Seguir comprando</a>
+                {% elif request.session.carritoLimpiado %}
+                    <p>El carrito se ha limpiado exitosamente.</p>
                     <a href="{% url 'home'  %} " >Seguir comprando</a>
                 {% endif %} 
             </div>
@@ -21,23 +24,27 @@
                 {% if request.session.carrito.items %}
                     <table class="tabla">
                         <tr>
+                            
                             <th>Producto</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Subtotal</th>
+                            <th></th>
                         </tr>
                     {% for key,value in request.session.carrito.items %}
                         <tr>
                             <td>{{ value.nombre }}</td>
-                            <td>{{ value.precio }}</td>
-                            <td><input type="number" step="1" min="0" max="10" value="{{ value.cantidad }}" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
-                            <td>{{ value.acumulado }}</td>
+                            <td>${{ value.precio }}</td>
+                            <td>{{ value.cantidad }}</td>
+                            <!-- <td><input type="number" step="1" min="0" max="10" value="{{ value.cantidad }}" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td> -->
+                            <td>${{ value.acumulado }}</td>
+                            <td><a href="{% url 'eliminar' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a></td>
                         </tr>             
                     {% endfor%}
                     </table>
                     <div class="botones-carrito-container">
                         <a  href="{% url 'limpiar'  %} " >Limpiar carrito</a>
-                        <a disabled="disabled">Actualizar carrito</a>
+                        <!-- <a disabled="disabled">Actualizar carrito</a> -->
                     </div>
                 {% else %} 
                 {% endif %} 
@@ -52,15 +59,15 @@
                         <table class="tabla">
                             <tr>
                                 <td>SubTotal</td>
-                                <td>34000</td>
+                                <td>${{ request.session.subTotal }}</td>
                               </tr>  
                               <tr>
                                   <td>Envío</td>
-                                  <td>$12000</td>
+                                  <td>$0</td>
                                 </tr>   
                                 <tr>
                                     <td>Total</td>
-                                    <td>$46000</td>
+                                    <td>${{ request.session.subTotal }}</td>
                                   </tr>   
                         </table>
                     </div>

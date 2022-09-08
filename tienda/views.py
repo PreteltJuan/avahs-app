@@ -67,3 +67,9 @@ def limpiar_carrito(request):
     carritoCompras = Carrito(request)
     carritoCompras.limpiar()
     return redirect("carrito")
+
+def eliminar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.eliminar(producto)
+    return redirect("carrito")

@@ -46,7 +46,7 @@
           <span onclick="ocultarFind()"  class="material-symbols-outlined icons">search</span>
           <span class="material-symbols-outlined icons">person</span>
           <span class="material-symbols-outlined icons">favorite</span>
-          <a href="<span class="material-symbols-outlined icons">local_mall  </span>/app/carrito"><span class="material-symbols-outlined icons">local_mall  </span></a>
+          <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           
         </div>
       </div>
@@ -58,7 +58,7 @@
       </nav>
       <div id="find" class="find">
         <input class="campo-texto" type="text" placeholder="Buscar productos..."  name="nombredelacaja">
-        <a  href="/app/resultados">Buscar</a>
+        <a onclick="test()" href="/app/resultados">Buscar</a>
       </div>
     </header>
    
