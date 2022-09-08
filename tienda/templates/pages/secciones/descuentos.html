@@ -21,13 +21,12 @@
         {%endif%}
         <div class="info">
           <p class="name">{{p.nombre}}</p>
+          <p class="precio-anterior">${{p.precioAnterior}}</p>
           <p class="precio">${{p.precio}}</p>
         </div>
       </div>
     </a>
 
-{% endfor%}
-
-
+  {% endfor%}
 {% endblock %}
 

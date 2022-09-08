@@ -96,6 +96,12 @@
     font-weight: 400;
 }
 
+.card .precio-anterior{
+    text-decoration: line-through;
+    margin: 4px 0px;
+    font-size: 14rem;
+  
+}
 
 .card .precio{
     margin: 4px 0px;

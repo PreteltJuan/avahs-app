@@ -12,33 +12,36 @@
     <div class="container">
         <div class="content">
             <div class="content-header">
-                <p>{{ producto.nombre }} se ha agregado a tu carrito</p>
-                <a href="http://">Seguir comprando</a>
+                {% if request.session.productoAgregado %}
+                    <p>{{ request.session.ultimoProducto }} se ha agregado a tu carrito.</p>
+                    <a href="{% url 'home'  %} " >Seguir comprando</a>
+                {% endif %} 
             </div>
             <div class="content-middle">
-                <table class="tabla">
-                    <tr>
-                      <th>Producto</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
-                      <th>Subtotal</th>
-                    </tr>
-                    <tr>
-                      <td>{{ producto.nombre }}</td>
-                      <td>$34000</td>
-                      <td><input type="number" step="1" min="0" max="10" value="1" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
-                      <td>$34000</td>
-                    </tr>  
-                    <tr>
-                        <td>Blusa roja</td>
-                        <td>$34000</td>
-                        <td><input type="number" step="1" min="0" max="10" value="1" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
-                        <td>$34000</td>
-                      </tr>            
-                  </table>
-                <div class="actualizar-carrito-container">
-                    <button disabled="disabled">Actualizar carrito</button>
-                </div>
+                {% if request.session.carrito.items %}
+                    <table class="tabla">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    {% for key,value in request.session.carrito.items %}
+                        <tr>
+                            <td>{{ value.nombre }}</td>
+                            <td>{{ value.precio }}</td>
+                            <td><input type="number" step="1" min="0" max="10" value="{{ value.cantidad }}" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td>
+                            <td>{{ value.acumulado }}</td>
+                        </tr>             
+                    {% endfor%}
+                    </table>
+                    <div class="botones-carrito-container">
+                        <a  href="{% url 'limpiar'  %} " >Limpiar carrito</a>
+                        <a disabled="disabled">Actualizar carrito</a>
+                    </div>
+                {% else %} 
+                {% endif %} 
+
             </div>
             <div class="content-bottom">
                 <div class="content">

@@ -23,7 +23,7 @@
         <span class="nombre">{{ producto.nombre }}</span>
         <span class="precio">${{ producto.precio }}</span>
         <span class="disponibilidad">Solo quedan 1 disponibles</span>
-        <a onclick="agregarProducto()" class="btn" id="btn" href="/app/carrito/{{ producto.nombre }}">Añadir al carrito</a>
+        <a onclick="agregarProducto()" class="btn" id="btn" href="{% url 'agregar' producto.id %} " >Añadir al carrito</a>
         {%if producto.descripcion %}
           <p class="descripcion">{{ producto.descripcion }}</p>
         {%endif%}

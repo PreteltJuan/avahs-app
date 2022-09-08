@@ -44,10 +44,10 @@ main{
     border: 1px solid rgb(206, 212, 218);
     outline: none;
     text-decoration: none;
-    color: black;
+    color: white;
     padding: 2% 4%;
     border-radius: 6px;
-    background-color: #61788d;
+    background-color: #3e5264;
     text-align: center;
 }
 
@@ -80,7 +80,7 @@ main{
 }
 
 
-.actualizar-carrito-container{
+.botones-carrito-container{
     border: 1px solid rgb(206, 212, 218);
     border-radius: 6px;
     padding: 2% 4%;
@@ -89,7 +89,7 @@ main{
 }
 
 
-.actualizar-carrito-container button{
+.botones-carrito-container a{
     background-color: #3e5264;
     width: 200px;
     height: 40px;
@@ -97,13 +97,18 @@ main{
     color: #fafaf9;
     border-style: none;
     font-size: 15rem;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
-.actualizar-carrito-container button:hover{
+.botones-carrito-container a:hover{
     background-color: #34414d;
 }
 
-.actualizar-carrito-container button:disabled{
+.botones-carrito-container a:disabled{
     background-color: #f2e3da;
     color: #485764;
 }
@@ -187,7 +192,7 @@ main{
     }
 
     
-    .actualizar-carrito-container{
+    .botones-carrito-container{
         justify-content: center;
     }
 

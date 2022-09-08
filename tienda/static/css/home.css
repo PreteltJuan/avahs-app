@@ -1,4 +1,12 @@
 
+main{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .container{
     width: 65%;
     flex-direction: column;
@@ -21,36 +29,57 @@ section h2{
 }
 
 
-.card{
-    width: 30%;
-}
-.card img{
-    max-width: 100%;
-}
-
-.info{
+.clothescontainer{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.card .name{
-    margin: 4px 0px;
-    text-transform: uppercase;
-    font-size: 10px;
-}
-
-
-.card .precio{
-    margin: 4px 0px;
-    font-size: 12px;
-}
-
-.card .detalle{
-    margin: 6px 0px;
-    font-size: 14px;
-    color: #b04f53;
-    font-weight: bold;
-}
-
+    justify-content: center;
+    margin: 32px 0px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  
+  .clothescontainer a{
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+  }
+    
+  
+  .card{
+      width: 240px;
+      border-radius: 8px;
+      border:  0.1px solid rgb(206, 212, 218);
+      overflow: hidden;
+      gap: 2% 4%;
+  }
+  .card img{
+      width: 100%;
+  }
+  
+  
+  .clothescontainer a .name{
+      margin: 12px 0px;
+      text-transform: uppercase;
+      font-size: 14rem;
+      font-weight: 400;
+  }
+  
+  .card .precio-anterior{
+      text-decoration: line-through;
+      margin: 4px 0px;
+      font-size: 14rem;
+    
+  }
+  
+  .card .precio{
+      margin: 4px 0px;
+      font-size: 14rem;
+      font-size: 800;
+  }
+  
+  .card .detalle{
+      margin: 6px 0px;
+      font-size: 16px;
+      color: #b04f53;
+      font-weight: bold;
+  }
+  

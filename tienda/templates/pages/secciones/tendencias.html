@@ -9,14 +9,20 @@
 
 {% block categoria-texto %} Dale una mirada a los productos que están de moda{% endblock %}
 
-{% block productos %}
 
-<div class="card">
-    <img src="{% static "images/products/lampara1.jpg.webp" %}" alt="">
-    <div class="info">
-      <p class="name">sobremesa estudio blanco</p>
-      <p class="precio">$52.000</p>
-      <p class="detalle">Agotado</p>
-    </div>
-  </div> 
+{% block productos %}
+  {% for p in lista_productos%}
+    <a href="/app/producto/{{ p.nombre }}">
+      <div onclick="mostrarProducto" class="card">
+        
+        {%if p.imagen %}
+          <img src="{{ p.imagen.url }}" alt="">
+        {%endif%}
+        <div class="info">
+          <p class="name">{{p.nombre}}</p>
+          <p class="precio">${{p.precio}}</p>
+        </div>
+      </div>
+    </a>
+  {% endfor%}
 {% endblock %}
