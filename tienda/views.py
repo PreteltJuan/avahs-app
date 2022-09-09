@@ -37,7 +37,14 @@ def tendencias(request):
 
 
 def resultados(request):
-    return render(request, "pages/resultados.html")
+    text = request.GET.get('search', '')
+    producto = Producto.objects.filter(nombre__icontains=text)
+    items = len(producto)
+    data = {
+        'productos': producto,
+        'items': items,
+    } 
+    return  render(request, "pages/resultados.html", data)
 
 def login(request):
     return render(request, "pages/login.html")

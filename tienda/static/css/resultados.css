@@ -1,28 +1,118 @@
 
 .main-header{
     margin: 56px 0px;
-    width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.main-header .content{
-    width: 65%;
-    display: flex;
-    justify-content:flex-start;
+.main-header h2{
+    margin: 0;
+    font-size: 34rem;
+    text-transform: uppercase;
 }
 
+.main-header span{
+    margin: 16px 0px;
+    font-size: 16rem;
+}
 
 .container{
     width: 100%;
     display: flex;
     justify-content: center;
-    margin: 120px 0px;
 }
-
 
 .content{
     width: 65%;
-    display: flex;
-    justify-content: flex-start;
 }
+
+.content-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-header span{
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+
+.ordenar-select{
+    line-height: 1.3;
+    padding: .4em 1.4em .3em .8em;
+    width: 250px;
+    max-width: 100%; 
+    border: 1px solid #aaa;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.ordenar-select option {
+    font-weight:normal;
+  }
+
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.clothescontainer{
+  display: flex;
+  justify-content: center;
+  margin: 32px 0px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+
+.clothescontainer a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+  
+
+.card{
+    width: 240px;
+    border-radius: 8px;
+    border:  0.1px solid rgb(206, 212, 218);
+    overflow: hidden;
+    gap: 2% 4%;
+}
+.card img{
+    width: 100%;
+}
+
+
+.clothescontainer a .name{
+    margin: 12px 0px;
+    text-transform: uppercase;
+    font-size: 14rem;
+    font-weight: 400;
+}
+
+.card .precio-anterior{
+    text-decoration: line-through;
+    margin: 4px 0px;
+    font-size: 14rem;
+  
+}
+
+.card .precio{
+    margin: 4px 0px;
+    font-size: 14rem;
+    font-size: 800;
+}
+
+.card .detalle{
+    margin: 6px 0px;
+    font-size: 16px;
+    color: #b04f53;
+    font-weight: bold;
+}
+

@@ -1,24 +1,48 @@
 {% extends "base.html" %} 
 {% load static %} 
 
-{% block titulo %} Resultados {% endblock%} 
-
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/resultados.css' %}" />
 {% endblock %} 
 
 {% block body %}
-
+<main>
   <div class="main-header">
-    <div class="content">
-        <span>Resultados</span>
-    </div>
+    <h2> Resultados</h2>
+    {% if items == 0 %}
+      <span>No se encontraron artículos</span>
+    {%endif%}
   </div>
   <div class="container">
     <div class="content">
-        <span>No se encontraron productos que concuerden con la selección.</span>
-    </di>
+      {% if items > 0 %}
+      <div class="content-header">
+        <span>{{items }} artículos encontrados</span>
+        <select class="ordenar-select">
+          <option value="date">Ordenar por los últimos</option>
+          <option value="price" selected="selected">Ordenar por precio: bajo a alto</option>
+          <option value="price-desc">Ordenar por precio: alto a bajo</option>
+        </select>
+      </div>
+      
+      <div class="clothescontainer">
+        {% for p in productos%}
+          <a href="/app/producto/{{ p.nombre }}">
+            <div class="card">
+              {%if p.imagen %}
+                <img src="{{ p.imagen.url }}" alt="">
+              {%endif%}
+              <div class="info">
+                <p class="name">{{p.nombre}}</p>
+                <p class="precio">${{p.precio}}</p>
+              </div>
+            </div>
+          </a>
+        {% endfor%}
+      </div>
+      {%endif%}
+    </div>
   </div>
   
-
+</main>
 {% endblock %}

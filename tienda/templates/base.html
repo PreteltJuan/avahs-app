@@ -52,13 +52,15 @@
       </div>
 
       <nav class="nav-bar">
-        <a href="/app/novedades">Novedades</a>
-        <a href="/app/descuentos">Descuentos</a>
+        <a href="{% url 'novedades' %}">Novedades</a>
+        <a href="{% url 'descuentos' %}">Descuentos</a>
         <!-- <a href="/app/tendencias">Tendencias</a> -->
       </nav>
       <div id="find" class="find">
-        <input class="campo-texto" type="text" placeholder="Buscar productos..."  name="nombredelacaja">
-        <a onclick="test()" href="/app/resultados">Buscar</a>
+        <form action="{% url 'resultados' %}" method="get" class="busqueda">
+          <input class="campo-texto" type="text" placeholder="Buscar productos..."  name="search">
+          <button >Buscar</button>
+        </form>
       </div>
     </header>
    
@@ -68,11 +70,11 @@
           <div class="sections">
             <div class="horizontal-bar"></div>
             <div class="link">
-              <a href="">novedades</a>
+              <a href="{% url 'novedades' %}">novedades</a>
             </div>
             <div class="horizontal-bar"></div>
             <div class="link">
-              <a href="">descuentos</a>
+              <a href="{% url 'descuentos' %}">descuentos</a>
             </div>
             <!-- <div class="horizontal-bar"></div>
             <div class="link">

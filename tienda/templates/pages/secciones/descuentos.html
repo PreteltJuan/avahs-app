@@ -14,7 +14,7 @@
 {% block productos %}
   {% for p in lista_productos%}
     <a href="/app/producto/{{ p.nombre }}">
-      <div onclick="mostrarProducto" class="card">
+      <div class="card">
         
         {%if p.imagen %}
           <img src="{{ p.imagen.url }}" alt="">
