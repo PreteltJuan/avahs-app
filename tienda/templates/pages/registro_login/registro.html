@@ -17,32 +17,341 @@
                 <h1>
                     Registrarse
                 </h1>
-                <form action="" method="">
+                <form id="formulario" action="" method="POST">
                     <div class="form-content">
                         <div class="contenedor-input">
-                            <label>
-                                Usuario *
-                            </label>
-                            <input type="text" required>
+                            <label>Primer nombre * </label>
+                            <input type="text" name="primer_nombre" required>
                         </div>
+
                         <div class="contenedor-input">
-                            <label>
-                                Correo electrónico *
-                            </label>
-                            <input type="email" required>
+                            <label>Segundo nombre </label>
+                            <input type="text" name="segundo_nombre">
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Primer apellido * </label>
+                            <input type="text" name="primer_apellido" required>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Segundo apellido </label>
+                            <input type="text" name="segundo_apellido">
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Nombre de usuario * </label>
+                            <input type="text" name="nombre_usuario" required>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Correo electr&oacute;nico * </label>
+                            <input type="email" name="correo" required>
                         </div>
         
                         <div class="contenedor-input">
-                            <label>
-                                Contraseña *
-                            </label>
-                            <input type="password" required>
+                            <label>Contrase&ntilde;a * </label>
+                            <input type="password" id="clave1" name="clave" required>
                         </div>
+
+                        <div class="contenedor-input">
+                            <label>Confirmar contrase&ntilde;a * </label>
+                            <input type="password" id="clave2" required>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Barrio * </label>
+                            <input type="text" list="barrios" name="Barrio" required>
+                            <datalist id="barrios">
+                                <option value="Popular 1" />
+                                <option value="Popular 2" />
+                                <option value="El Rodeo" />
+                                <option value="Santo Domingo Savio 1" />
+                                <option value="Santo Domingo Savio 2" />
+                                <option value="Granizal" />
+                                <option value="Moscú 2" />
+                                <option value="Villa Guadalupe" />
+                                <option value="San Pablo" />
+                                <option value="Aldea Pablo VI" />
+                                <option value="La Esperanza 2" />
+                                <option value="El Compromiso" />
+                                <option value="La Avanzada" />
+                                <option value="Carpinelo" />
+                                <option value="Santa Cruz" />
+                                <option value="La Isla" />
+                                <option value="El Playón de Los Comuneros" />
+                                <option value="Pablo VI" />
+                                <option value="La Frontera" />
+                                <option value="La Francia" />
+                                <option value="Andalucía" />
+                                <option value="Villa del Socorro" />
+                                <option value="Villa Niza" />
+                                <option value="Moscú 1" />
+                                <option value="La Rosa" />
+                                <option value="La Salle" />
+                                <option value="Las Granjas" />
+                                <option value="Campo Valdes 2" />
+                                <option value="Santa Inés" />
+                                <option value="El Raizal" />
+                                <option value="El Pomar" />
+                                <option value="Manrique Central 2" />
+                                <option value="Manrique Oriental" />
+                                <option value="Versalles 1" />
+                                <option value="Versalles 2" />
+                                <option value="La Cruz" />
+                                <option value="La Honda" />
+                                <option value="Oriente" />
+                                <option value="Maria Cano – Carambolas" />
+                                <option value="San José La Cima 1" />
+                                <option value="San José La Cima 2"  />
+                                <option value="Aranjuez" />
+                                <option value="Berlín" />
+                                <option value="San Isidro" />
+                                <option value="Palermo" />
+                                <option value="Bermejal – Los Álamos" />
+                                <option value="Moravia" />
+                                <option value="Sevilla" />
+                                <option value="San Pedro" />
+                                <option value="Manrique Central 1" />
+                                <option value="Campo Valdes 1" />
+                                <option value="Las Esmeraldas" />
+                                <option value="La Piñuela" />
+                                <option value="Brasilia" />
+                                <option value="Miranda" />
+                                <option value="Castilla" />
+                                <option value="Toscana" />
+                                <option value="Héctor Abad Gómez" />
+                                <option value="La Paralela" />
+                                <option value="Las Brisas" />
+                                <option value="Florencia" />
+                                <option value="Tejelo" />
+                                <option value="Boyacá" />
+                                <option value="Belalcazar" />
+                                <option value="Girardot" />
+                                <option value="Tricentenario" />
+                                <option value="Francisco Antonio Zea" />
+                                <option value="Alfonso López" />
+                                <option value="Caribe" />
+                                <option value="El Progreso" />
+                                <option value="Doce de Octubre 1" />
+                                <option value="Doce de Octubre 2" />
+                                <option value="Santander" />
+                                <option value="Pedregal" />
+                                <option value="La Esperanza" />
+                                <option value="San Martín de Porres" />
+                                <option value="Kennedy" />
+                                <option value="Picacho" />
+                                <option value="Picachito" />
+                                <option value="Mirador del Doce" />
+                                <option value="El Progreso 2" />
+                                <option value="El Triunfo" />
+                                <option value="Robledo" />
+                                <option value="El Volador" />
+                                <option value="San Germán" />
+                                <option value="Barrio Facultad de Minas" />
+                                <option value="La Pilarica" />
+                                <option value="Bosques de San Pablo" />
+                                <option value="Altamira" />
+                                <option value="Córdoba" />
+                                <option value="López de Mesa" />
+                                <option value="El Diamante" />
+                                <option value="Aures 1" />
+                                <option value="Aures 2" />
+                                <option value="Bello Horizonte" />
+                                <option value="Villa Flora" />
+                                <option value="Palenque" />
+                                <option value="Cucaracho" />
+                                <option value="Fuente Clara" />
+                                <option value="Santa Margarita" />
+                                <option value="Olaya Herrera" />
+                                <option value="Pajarito" />
+                                <option value="Monteclaro" />
+                                <option value="Villa de La Iguaná" />
+                                <option value="La Cuchilla" />
+                                <option value="La Aurora" />
+                                <option value="Villa Hermosa" />
+                                <option value="La Mansión" />
+                                <option value="San Miguel" />
+                                <option value="La Ladera" />
+                                <option value="Golondrinas" />
+                                <option value="Batallón Girardot" />
+                                <option value="Llanaditas" />
+                                <option value="Los Mangos" />
+                                <option value="Enciso" />
+                                <option value="Sucre" />
+                                <option value="El Pinal" />
+                                <option value="Trece de Noviembre" />
+                                <option value="La Libertad" />
+                                <option value="Villatina" />
+                                <option value="San Antonio" />
+                                <option value="Las Estancias" />
+                                <option value="Villa Turbay" />
+                                <option value="La Sierra" />
+                                <option value="Villa Lilliam" />
+                                <option value="Esfuerzos de Paz 1" />
+                                <option value="Esfuerzos de Paz 2" />
+                                <option value="Buenos Aires" />
+                                <option value="Caicedo" />
+                                <option value="Juan Pablo II" />
+                                <option value="Ocho de Marzo" />
+                                <option value="Barrios de Jesús" />
+                                <option value="Bomboná 2" />
+                                <option value="Los Cerros – El Vergel" />
+                                <option value="Alejandro Echavarría" />
+                                <option value="Miraflores" />
+                                <option value="Cataluña" />
+                                <option value="La Milagrosa" />
+                                <option value="Gerona" />
+                                <option value="El Salvador" />
+                                <option value="Loreto" />
+                                <option value="Asomadera 1" />
+                                <option value="Asomadera 2" />
+                                <option value="Asomadera 3" />
+                                <option value="Quinta Linda" />
+                                <option value="Barrio Pablo Escobar" />
+                                <option value="La Candelaria" />
+                                <option value="Prado" />
+                                <option value="Jesús Nazareno" />
+                                <option value="El Chagualo" />
+                                <option value="Estación Villa" />
+                                <option value="San Benito" />
+                                <option value="Guayaquil" />
+                                <option value="Corazón de Jesús – Barrio Triste" />
+                                <option value="Calle Nueva" />
+                                <option value="Perpetuo Socorro" />
+                                <option value="Barrio Colón" />
+                                <option value="Las Palmas" />
+                                <option value="Bomboná 1" />
+                                <option value="Boston" />
+                                <option value="Los Ángeles" />
+                                <option value="Villa Nueva" />
+                                <option value="San Diego" />
+                                <option value="Los Conquistadores" />
+                                <option value="Laureles" />
+                                <option value="Carlos E. Restrepo" />
+                                <option value="Suramericana" />
+                                <option value="Naranjal" />
+                                <option value="San Joaquín" />
+                                <option value="Bolivariana" />
+                                <option value="Las Acacias" />
+                                <option value="La Castellana" />
+                                <option value="Lorena" />
+                                <option value="El Velódromo" />
+                                <option value="Estadio" />
+                                <option value="Los Colores" />
+                                <option value="Cuarta Brigada" />
+                                <option value="Florida Nueva" />
+                                <option value="La América" />
+                                <option value="Ferrini" />
+                                <option value="Calasanz" />
+                                <option value="Los Pinos" />
+                                <option value="La Floresta" />
+                                <option value="Santa Lucía" />
+                                <option value="El Danubio" />
+                                <option value="Campo Alegre" />
+                                <option value="Santa Mónica" />
+                                <option value="Barrio Cristóbal" />
+                                <option value="Simón Bolívar" />
+                                <option value="Santa Teresita" />
+                                <option value="Calasanz Parte Alta" />
+                                <option value="San Javier 1" />
+                                <option value="San Javier 2" />
+                                <option value="El Pesebre" />
+                                <option value="Blanquizal" />
+                                <option value="Santa Rosa de Lima" />
+                                <option value="Los Alcázares" />
+                                <option value="Metropolitano" />
+                                <option value="La Pradera" />
+                                <option value="Juan XXIII" />
+                                <option value="La Divisa" />
+                                <option value="Veinte de Julio" />
+                                <option value="Belencito" />
+                                <option value="Betania" />
+                                <option value="El Corazón" />
+                                <option value="Las Independencias" />
+                                <option value="Nuevos Conquistadores" />
+                                <option value="El Salado" />
+                                <option value="Eduardo Santos" />
+                                <option value="Peñitas" />
+                                <option value="Antonio Nariño" />
+                                <option value="El Socorro" />
+                                <option value="Calasania" />
+                                <option value="Castropol" />
+                                <option value="Barrio Colombia" />
+                                <option value="Villa Carlota" />
+                                <option value="Lalinde" />
+                                <option value="Manila" />
+                                <option value="Las Lomas 1" />
+                                <option value="Las Lomas 2" />
+                                <option value="Altos del Poblado" />
+                                <option value="El Tesoro" />
+                                <option value="Los Naranjos" />
+                                <option value="Los Balsos 1" />
+                                <option value="Los Balsos 2" />
+                                <option value="San Lucas" />
+                                <option value="El Diamante" />
+                                <option value="El Castillo" />
+                                <option value="Alejandría" />
+                                <option value="La Florida" />
+                                <option value="El Poblado" />
+                                <option value="Astorga" />
+                                <option value="Patio Bonito" />
+                                <option value="La Aguacatala" />
+                                <option value="Santa María de Los Ángeles" />
+                                <option value="Tenche" />
+                                <option value="Trinidad" />
+                                <option value="Santa Fe" />
+                                <option value="Campo Amor" />
+                                <option value="Cristo Rey" />
+                                <option value="Guayabal" />
+                                <option value="La Colina" />
+                                <option value="Belén" />
+                                <option value="Cerro Nutibara" />
+                                <option value="Fátima" />
+                                <option value="Rosales" />
+                                <option value="Granada" />
+                                <option value="San Bernardo" />
+                                <option value="Las Playas" />
+                                <option value="Diego Echavarria" />
+                                <option value="La Mota" />
+                                <option value="El Rincón" />
+                                <option value="La Hondonada" />
+                                <option value="La Loma de Los Bernal" />
+                                <option value="La Gloria" />
+                                <option value="Altavista" />
+                                <option value="La Palma" />
+                                <option value="Zafra" />
+                                <option value="Los Alpes" />
+                                <option value="Las Violetas" />
+                                <option value="Las Mercedes" />
+                                <option value="Nueva Villa de Aburrá" />
+                                <option value="Miravalle" />
+                                <option value="El Nogal – Los Almendros" />
+                            </datalist>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Fecha de nacimiento * </label>
+                            <input type="date" name="fecha" required>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Sexo * </label>
+                            <select name="sexo">
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+
+                        <a href="{% url "login" %}" style="font-size: 16px">Tengo una cuenta, inicia sesi&oacute;n aquí</a>
+                        <p style="color: red" id="error"></p>
                         <input type="submit" class="button " value="Registrarse">
-    
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+<script src="{% static "scripts/registro.js" %}"></script>
 {% endblock %}

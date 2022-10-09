@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .carrito import Carrito
 from .models import Producto
-
+from django.contrib.auth import authenticate, login as userlogin, logout
 
 def home(request):
     productos = Producto.objects.all()
@@ -47,10 +47,24 @@ def resultados(request):
     return  render(request, "pages/resultados.html", data)
 
 def login(request):
-    return render(request, "pages/login.html")
+    error = False
+    username = request.POST.get("username", "")
+    password = request.POST.get("password", "")
+
+    if username and password:
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            userlogin(request, user)
+            return redirect("home")
+        else:
+            error = True
+
+    return render(request, "pages/registro_login/login.html", {
+        "error": error
+    })
 
 def registro(request):
-    return render(request, "pages/registro.html")
+    return render(request, "pages/registro_login/registro.html")
 
 
 def producto(request, nombre_p):
@@ -66,7 +80,7 @@ def carrito(request):
 
 def agregar_producto(request, producto_id):
     carritoCompras = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
+    producto = Producto.objects.get(pk=producto_id)
     carritoCompras.agregar(producto)
     return redirect("carrito")
 
@@ -77,6 +91,6 @@ def limpiar_carrito(request):
 
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
+    producto = Producto.objects.get(pk=producto_id)
     carrito.eliminar(producto)
     return redirect("carrito")

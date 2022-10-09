@@ -1,13 +1,10 @@
-
 .container{
-    width: 65%;
     display: flex;
     justify-content: center;
 }
 
 .content{
     margin: 50px 0px;
-    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,17 +35,26 @@
     margin: 24px 0px;
 }
 
-
+.content-middle form{
+    width: 100%;
+}
 
 .form-content{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 350px;
+    gap: 32px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form-content a{
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .contenedor-input{
-    width: 100%;
+    width: 90%;
     margin: 30px 0px;
     display: flex;
     flex-direction: column;
@@ -59,10 +65,15 @@
     margin: 8px 0px;
 }
 
+.contenedor-input select,
 .contenedor-input input{
     width: 100%;
-    background-color: #f7f7f7;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.03);
     border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     height: 40px;
 }
 
@@ -79,4 +90,10 @@
 
 .button:hover{
     background-color: #292d33;
+}
+
+@media (min-width:720px){
+    .contenedor-input{
+        width: 40%;
+    }
 }

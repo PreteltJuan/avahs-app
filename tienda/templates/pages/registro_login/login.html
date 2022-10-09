@@ -15,22 +15,29 @@
             </div>
             <div class="content-middle">
                 <h1>
-                    Iniciar sesión
+                    Iniciar sesi&oacute;n
                 </h1>
-                <form action="" method="">
+                {% if error %}
+                <p>
+                    Nombre de usuario o contrase&ntilde;a incorrecto, intente de nuevo
+                </p>
+                {% endif %}
+                <form action="" method="POST">
+                    {% csrf_token %}
                     <div class="form-content">
                         <div class="contenedor-input">
                             <label>
                                 Usuario *
                             </label>
-                            <input type="text" required>
+                            <input type="text" name="username" required>
                         </div>
                         <div class="contenedor-input">
                             <label>
-                                Contraseña *
+                                Contrase&ntilde;a *
                             </label>
-                            <input type="password" required>
+                            <input type="password" name="password" required>
                         </div>
+                        <a href="{% url "registro" %}" style="font-size: 16px">¿No tienes cuenta? Registrate aqu&iacute;</a>
                         <input type="submit" class="button " value="Iniciar">
     
                     </div>

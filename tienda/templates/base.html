@@ -43,8 +43,12 @@
         </div>
         <a href="/app/home"> <h1>avahs </h1></a>
         <div class="right-icons">
+          <span style="font-size: 20px"> {% if request.user.is_authenticated %}
+            {{request.user.username}}
+            {% endif %}
+          </span>
           <span onclick="ocultarFind()"  class="material-symbols-outlined icons">search</span>
-          <span class="material-symbols-outlined icons">person</span>
+          <a href="{%url "login"%}"><span class="material-symbols-outlined icons">person</span></a>
           <span class="material-symbols-outlined icons">favorite</span>
           <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           

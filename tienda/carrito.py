@@ -32,10 +32,10 @@ class Carrito:
             
     
     def agregar(self, producto):
-        id = str(producto.id)
+        id = str(producto.pk)
         if id not in self.carrito.keys():
             self.carrito[id] = {
-                "producto_id" : producto.id,
+                "producto_id" : producto.pk,
                 "nombre": producto.nombre,
                 "acumulado": producto.precio,
                 "precio": producto.precio,
@@ -75,7 +75,7 @@ class Carrito:
 
     
     def eliminar(self, producto):
-        id = str(producto.id)
+        id = str(producto.pk)
         if id in self.carrito:
             del self.carrito[id]
             self.guardar_carrito()
