@@ -20,10 +20,12 @@
         <img src="{{ producto.imagen.url }}" >
       </div>
       <div class="product-info">
-        <span class="nombre">{{ producto.nombre }}</span>
+        <span class="nombre">{{ producto.nombre   }}</span>
         <span class="precio">${{ producto.precio }}</span>
-        <span class="disponibilidad">Solo quedan 1 disponibles</span>
-        <a onclick="agregarProducto()" class="btn" id="btn" href="{% url 'agregar' producto.id %} " >Añadir al carrito</a>
+        <span class="disponibilidad">Solo quedan {{ producto.unidades }} disponibles</span>
+
+        <a class="btn" id="btn" href="{% url 'agregarAlCarrito' producto.id %} " >Añadir al carrito</a>
+        <a class="btn " id="btn" href="{% url 'agregarAFavoritos' producto.id %} " >Añadir a favoritos</a>
         {%if producto.descripcion %}
           <p class="descripcion">{{ producto.descripcion }}</p>
         {%endif%}

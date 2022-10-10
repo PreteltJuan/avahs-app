@@ -38,7 +38,7 @@
                             <td>{{ value.cantidad }}</td>
                             <!-- <td><input type="number" step="1" min="0" max="10" value="{{ value.cantidad }}" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td> -->
                             <td>${{ value.acumulado }}</td>
-                            <td><a href="{% url 'eliminar' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a></td>
+                            <td><a href="{% url 'eliminarCarrito' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a></td>
                         </tr>             
                     {% endfor%}
                     </table>

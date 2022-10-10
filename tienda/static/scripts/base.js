@@ -1,72 +1,129 @@
-
-
 window.addEventListener('resize', resize_menu_lateral);
+window.addEventListener('resize', resize_menu_favoritos);
 
 var estado_find = false
+var estado_menu_lateral = false
+var estado_menu_favoritos = false
+var pageWidth = 0;
+var menuLateral = document.getElementById("menu-lateral")
+var menuFavoritos = document.getElementById("menu-favoritos")
+var fav_btn = document.getElementById("favorite-btn")
+var find = document.getElementById("find")
+
+//lines que abren y cierran menu
+var linea1 = document.getElementById("line-menu-icon")
+var linea2 = document.getElementById("line-menu-icon-2")
+
+
 function ocultarFind() {
-
     if (estado_find) {
-        document.getElementById("find").classList.remove("find-show");
-        document.getElementById("find").classList.add("find-hidden");
+        find.classList.remove("find-show");
+        find.classList.add("find-hidden");
     } else {
-        document.getElementById("find").classList.remove("find-hidden");
-        document.getElementById("find").classList.add("find-show");
-
+        find.classList.remove("find-hidden");
+        find.classList.add("find-show");
         if (estado_menu_lateral) {
-            mostrar()
+            majenarMenuOpciones()
         }
     }
-
     estado_find = !estado_find
 }
-var estado_menu_lateral = false
-var pageWidth = 0;
 
-function resize_menu_lateral() {
-    pageWidth = document.documentElement.scrollWidth;
-    if (!estado_menu_lateral) {
-        if (pageWidth < 600) {
-            document.getElementById("menu-lateral").style.left = "-41vw";
-        } else if (pageWidth < 900) {
-            document.getElementById("menu-lateral").style.left = "-51vw";
-        } else {
-            document.getElementById("menu-lateral").style.left = "-31vw";
-        }
-    } else {
-        document.getElementById("menu-lateral").style.left = "0";
-        if (pageWidth < 600) {
-            document.getElementById("menu-lateral").style.width = "41vw";
-        } else if (pageWidth < 900) {
-            document.getElementById("menu-lateral").style.width = "51vw";
-        } else {
-            document.getElementById("menu-lateral").style.width = "31vw";
-        }
-    }
-}
-function mostrar() {
-    pageWidth = document.documentElement.scrollWidth;
+
+
+function manejarMenuOpciones() {
     if (estado_menu_lateral) {
-        document.getElementById("line-menu-icon").classList.remove("rotate");
-        document.getElementById("line-menu-icon").classList.add("a-rotate");
+        linea1.classList.remove("rotate");
+        linea1.classList.add("a-rotate");
 
-        document.getElementById("line-menu-icon-2").classList.remove("rotate-2");
-        document.getElementById("line-menu-icon-2").classList.add("a-rotate-2");
+        linea2.classList.remove("rotate-2");
+        linea2.classList.add("a-rotate-2");
 
     } else {
         if (estado_find) {
             ocultarFind();
         }
-        document.getElementById("line-menu-icon").classList.remove("a-rotate");
-        document.getElementById("line-menu-icon").classList.add("rotate");
+        linea1.classList.remove("a-rotate");
+        linea1.classList.add("rotate");
 
-        document.getElementById("line-menu-icon-2").classList.remove("a-rotate-2");
-        document.getElementById("line-menu-icon-2").classList.add("rotate-2");
+        linea2.classList.remove("a-rotate-2");
+        linea2.classList.add("rotate-2");
 
-        document.getElementById("menu-lateral").style.left = "0";
+        menuLateral.style.left = "0";
     }
     estado_menu_lateral = !estado_menu_lateral
     resize_menu_lateral()
 }
+
+
+function manejarMenuFavoritos(){
+    if (estado_find) {
+        ocultarFind();
+    }
+    if(estado_menu_favoritos){
+        fav_btn.classList.remove("material-symbols-rounded");
+        fav_btn.classList.add("material-symbols-outlined");
+    }else{
+        fav_btn.classList.remove("material-symbols-outlined");
+        fav_btn.classList.add("material-symbols-rounded");
+    }
+    estado_menu_favoritos = !estado_menu_favoritos
+    resize_menu_favoritos()
+}
+
+
+function resize_menu_lateral() {
+    pageWidth = document.documentElement.scrollWidth;
+    if (!estado_menu_lateral) {
+        if (pageWidth < 600) {
+            menuLateral.style.left = "-41vw";
+        } else if (pageWidth < 900) {
+            menuLateral.style.left = "-51vw";
+        } else {
+            menuLateral.style.left = "-31vw";
+        }
+    } else {
+        menuLateral.style.left = "0";
+        if (pageWidth < 600) {
+            menuLateral.style.width = "41vw";
+        } else if (pageWidth < 900) {
+            menuLateral.style.width = "51vw";
+        } else {
+            menuLateral.style.width = "31vw";
+        }
+    }
+}
+
+function resize_menu_favoritos() {
+    pageWidth = document.documentElement.scrollWidth;
+    if (!estado_menu_favoritos) {
+        if (pageWidth < 600) {
+            menuFavoritos.style.right = "-41vw";
+        } else if (pageWidth < 900) {
+            menuFavoritos.style.right = "-51vw";
+        } else {
+            menuFavoritos.style.right = "-31vw";
+        }
+    } else {
+        menuFavoritos.style.right = "0";
+        if (pageWidth < 600) {
+            menuFavoritos.style.width = "31vw";
+        } else if (pageWidth < 900) {
+            menuFavoritos.style.width = "41vw";
+        } else {
+            menuFavoritos.style.width = "21vw";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 var top_header_seleccionado = 1
 
