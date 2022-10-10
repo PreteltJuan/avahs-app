@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from django.shortcuts import render, redirect
 
 from .favorito import Favorito
@@ -104,3 +105,11 @@ def eliminar_producto_favoritos(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     favoritos.eliminar(producto)
     return redirect(request.META.get('HTTP_REFERER'))
+
+def actualizar_carrito(request):
+    carro = Carrito(request)
+    for key in carro.carrito.keys():
+        newCant =  request.GET.get(key, '')
+        carro.actualizarCantidad(key, newCant)
+    return redirect("carrito")
+    

@@ -79,3 +79,8 @@ class Carrito:
         if id in self.carrito:
             del self.carrito[id]
             self.guardar_carrito()
+
+    def actualizarCantidad(self, id, cant):
+        if id in self.carrito:
+            self.carrito[id]['cantidad'] = cant
+            self.guardar_carrito()
