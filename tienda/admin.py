@@ -11,8 +11,8 @@ class ProductoAdmin(admin.ModelAdmin):
     list_per_page = 5
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ["segundo_nombre"]
-    search_fields = ["segundo_nombre"]
+    list_display = ["first_name", "segundo_nombre"]
+    search_fields = ["firts_name", "segundo_nombre"]
     list_per_page = 5
     
 

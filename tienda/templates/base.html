@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
       rel="stylesheet"
@@ -24,7 +25,7 @@
     <header>
       <div class="top-header">
         <div class="top-header-content-1" id="top-header-content-1">
-          <p>¿Ya eres cliente? <a href=""> entra</a></p>
+          <p>¿Ya eres cliente? <a href="{% url 'login' %}"> entra</a></p>
         </div>
         <div class="top-header-content-2" id="top-header-content-2">
           <p>Envíos gratis desde $100.000</p>
@@ -48,7 +49,13 @@
             {% endif %}
           </span>
           <span onclick="ocultarFind()"  class="material-symbols-outlined icons">search</span>
+          
+          {% if request.user.is_authenticated %}
+          <a href="{%url "logout"%}"><span class="material-symbols-outlined icons">logout</span></a>
+          {%else%}
           <a href="{%url "login"%}"><span class="material-symbols-outlined icons">person</span></a>
+          {% endif %}
+
           <span class="material-symbols-outlined icons">favorite</span>
           <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .carrito import Carrito
-from .models import Producto
-from django.contrib.auth import authenticate, login as userlogin, logout
+from .models import Producto, Usuario
+from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 def home(request):
     productos = Producto.objects.all()
@@ -47,6 +47,10 @@ def resultados(request):
     return  render(request, "pages/resultados.html", data)
 
 def login(request):
+
+    if request.user.is_authenticated:
+        return redirect("home")
+
     error = False
     username = request.POST.get("username", "")
     password = request.POST.get("password", "")
@@ -63,8 +67,56 @@ def login(request):
         "error": error
     })
 
+def logout(request):
+    userlogout(request)
+    return redirect("login")
+
 def registro(request):
-    return render(request, "pages/registro_login/registro.html")
+    error=False
+    nombre_campos = [
+        "primer_nombre",
+        "segundo_nombre",
+        "primer_apellido",
+        "segundo_apellido",
+        "nombre_usuario",
+        "correo",
+        "clave",
+        "barrio",
+        "direccion",
+        "fecha",
+        "sexo",
+    ]
+
+    campos = {
+        nombre: request.POST.get(nombre, "")
+        for nombre in nombre_campos
+    }
+
+    crear_usuario = campos.get("nombre_usuario")
+    if crear_usuario:
+        campos.update({
+            "first_name":campos.get("primer_nombre"),
+            "last_name":campos.get("primer_apellido"),
+            "username":campos.get("nombre_usuario"),
+            "email":campos.get("correo"),
+            "password":campos.get("clave"),
+            "fecha_nacimiento":campos.get("fecha")
+        })
+
+        borrar_campos = ("primer_nombre","primer_apellido","nombre_usuario","correo","clave","fecha")
+
+        for campo in borrar_campos:
+            campos.pop(campo, None)
+
+        user = Usuario.objects.create_user(**campos)
+
+        if user is not None:
+            userlogin(request, user)
+            return redirect("home")
+        else:
+            error = True
+
+    return render(request, "pages/registro_login/registro.html", {"error":error})
 
 
 def producto(request, nombre_p):

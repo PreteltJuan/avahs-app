@@ -17,7 +17,13 @@
                 <h1>
                     Registrarse
                 </h1>
+                {% if error %}
+                <p>
+                    El nombre de usuario o correo electr&oacute;nico ya existen, pruebe con otro
+                </p>
+                {% endif %}
                 <form id="formulario" action="" method="POST">
+                    {% csrf_token %}
                     <div class="form-content">
                         <div class="contenedor-input">
                             <label>Primer nombre * </label>
@@ -61,7 +67,7 @@
 
                         <div class="contenedor-input">
                             <label>Barrio * </label>
-                            <input type="text" list="barrios" name="Barrio" required>
+                            <input type="text" list="barrios" name="barrio" required>
                             <datalist id="barrios">
                                 <option value="Popular 1" />
                                 <option value="Popular 2" />
@@ -328,6 +334,11 @@
                                 <option value="Miravalle" />
                                 <option value="El Nogal – Los Almendros" />
                             </datalist>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>Direccion * </label>
+                            <input type="text" name="direccion" required>
                         </div>
 
                         <div class="contenedor-input">
