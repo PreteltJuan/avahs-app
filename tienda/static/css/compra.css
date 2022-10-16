@@ -1,0 +1,101 @@
+.main{
+   display: flex;
+   justify-content: center;
+}
+
+.container{
+    padding: 64px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80vw;
+}
+
+.left{
+    width: 40%;
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.right{
+    width: 60%;
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.contacto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contacto h2{
+    font-size: 24rem;
+    text-transform: uppercase;
+}
+
+.productos h2{
+    font-size: 24rem;
+    text-transform: uppercase;
+}
+
+
+.content{
+    width: 100%;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgb(178, 181, 185);;
+
+}
+
+.content label{
+    text-align: left;
+    font-size: 14rem;
+}
+
+.info-productos{
+    width: 100%;
+    display: flex;
+    padding: 5px 5px;
+}
+
+.info-productos .datos-productos{
+    display: flex;
+}
+
+.nombre-productos{
+    padding: 0px 8px;
+    font-size: 14px;
+}
+
+.precio-productos{
+    padding: 0px 8px;
+    font-size: 14px;
+}
+
+
+.boton-pagar{
+    padding: 24px 0px;
+}
+
+.boton-pagar button{
+    background-color: #3e5264;
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+    color: #fafaf9;
+    border-style: none;
+    font-size: 15rem;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}

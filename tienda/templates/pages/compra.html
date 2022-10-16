@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %} Avahs {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/compra.css' %}" />
+{% endblock %} 
+{% block body %} 
+<div class="main">
+    <div class="container">
+
+        <div class="left">
+            <div class="contacto">
+                <h2>Datos de contacto</h2>
+                <div class="content">
+                    <label for="">Nombres:  </label>
+                    <label for="">Juan</label> 
+                    <label for="">Pablo</label>
+                </div>
+                <div class="content">
+                    <label for="">Apellidos:  </label>
+                    <label for="">Pretelt</label>
+                </div>
+                <div class="content">
+                    <label for="">Email:  </label>
+                    <label for="">Pretelt678934@gmail.com</label>
+                </div>
+                <div class="content">
+                    <label for="">Ciudad, Barrio:  </label>
+                    <label for="">Medellín, </label><label for="">Bello</label>
+                </div>
+                <div class="content">
+                    <label for="">Dirección:  </label>
+                    <label for="">Calle 23 #56-46</label>
+                </div>
+                
+            </div>
+        </div>
+        <div class="right">
+            <div class="productos">
+                <h2>productos</h2>
+                <div class="content">
+                    <div class="info-productos">
+                        <div class="datos-productos">
+                          <div class="nombre-productos">
+                            <span>Sudadera roja clásica</span>
+                          </div>
+                          <div class="precio-productos">
+                            <span>$120.000</span>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="boton-pagar">
+                    <button>CONFIRMAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

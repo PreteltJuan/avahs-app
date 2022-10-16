@@ -31,21 +31,23 @@
                             <th>Subtotal</th>
                             <th></th>
                         </tr>
+                    <form action="{% url 'actualizarCarrito' %}" method="get">
                     {% for key,value in request.session.carrito.items %}
                         <tr>
                             <td>{{ value.nombre }}</td>
                             <td>${{ value.precio }}</td>
-                            <td>{{ value.cantidad }}</td>
-                            <!-- <td><input type="number" step="1" min="0" max="10" value="{{ value.cantidad }}" size="4" placeholder="" inputmode="numeric" autocomplete="off"></td> -->
+                            <td><input name="{{ key }}" type="number" step="1" min="1" max="10" value="{{ value.cantidad }}" size="4"  inputmode="numeric" autocomplete="off"></td>    
                             <td>${{ value.acumulado }}</td>
-                            <td><a href="{% url 'eliminar' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a></td>
+                            <td><a href="{% url 'eliminarCarrito' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a></td>
                         </tr>             
                     {% endfor%}
+                    
                     </table>
                     <div class="botones-carrito-container">
                         <a  href="{% url 'limpiar'  %} " >Limpiar carrito</a>
-                        <!-- <a disabled="disabled">Actualizar carrito</a> -->
+                        <button  type="submit">Actualizar carrito</button> 
                     </div>
+                </form>
                 {% else %} 
                 {% endif %} 
 
@@ -71,7 +73,7 @@
                                   </tr>   
                         </table>
                     </div>
-                    <a href="http://">Finalizar compra</a>
+                    <a href="{% url 'compra'  %}">Finalizar compra</a>
                 </div>
             </div>        
         </div>

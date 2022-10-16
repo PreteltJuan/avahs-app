@@ -13,6 +13,7 @@ class Producto(models.Model):
     descuento = models.BooleanField(default=False, null=False)
     descripcion = models.TextField(blank=True, null=True)
     imagen = models.ImageField(upload_to="productos", null=False)
+    popularidad = models.IntegerField(default=0)
     def __str__(self):
         return self.nombre
 

@@ -7,15 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     {% block styles %} {% endblock %}
     
@@ -38,7 +32,7 @@
           <a href="/app/home"> <h1>avahs </h1></a>
       </div>
       <div class="top">
-        <div onclick="mostrar()"  class="menu-icon">
+        <div onclick="manejarMenuOpciones()"  class="menu-icon">
           <div class="line-menu-icon " id="line-menu-icon"></div>
           <div class="line-menu-icon " id="line-menu-icon-2"></div>
         </div>
@@ -56,7 +50,7 @@
           <a href="{%url "login"%}"><span class="material-symbols-outlined icons">person</span></a>
           {% endif %}
 
-          <span class="material-symbols-outlined icons">favorite</span>
+          <span onclick="manejarMenuFavoritos()" id="favorite-btn" class="material-symbols-outlined icons">favorite</span>
           <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           
         </div>
@@ -106,6 +100,33 @@
           </div>
         </div>
     </div>
+
+
+    <div id="menu-favoritos" class="favoritos"> 
+      <div class="content-menu-lateral">
+        <h3>favoritos</h3>
+        {% if request.session.favoritos.items %}
+        {% for key,value in request.session.favoritos.items %}
+        <div class="sections">
+          <div class="info-producto">
+            <div class="datos">
+              <div class="nombre">
+                <span>{{ value.nombre }}</span>
+              </div>
+              <div class="precio">
+                <span>{{ value.precio }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="acciones">
+            <a href="{% url 'agregarAlCarrito' key%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
+            <a href="{% url 'eliminarFavorito' key%}"><span class="material-symbols-outlined icons eliminarProducto"> close </span></a>
+          </div>
+        </div>
+        {% endfor%}
+        {% endif%}
+      </div>
+  </div>
     {% block body %}  
     {% endblock %}
   

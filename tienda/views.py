@@ -1,7 +1,11 @@
+
 from django.shortcuts import render, redirect
+
+from .favorito import Favorito
 from .carrito import Carrito
 from .models import Producto, Usuario
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
+
 
 def home(request):
     productos = Producto.objects.all()
@@ -119,7 +123,7 @@ def registro(request):
     return render(request, "pages/registro_login/registro.html", {"error":error})
 
 
-def producto(request, nombre_p):
+def producto(request, nombre_p ):
     producto = Producto.objects.get(nombre=nombre_p)
     data = {
         'producto': producto,
@@ -130,19 +134,50 @@ def producto(request, nombre_p):
 def carrito(request):
     return  render(request, "pages/carrito.html")
 
-def agregar_producto(request, producto_id):
+
+def compra(request):
+    return render(request, "pages/compra.html" )
+
+
+
+
+
+
+def agregar_producto_carrito(request, producto_id):
     carritoCompras = Carrito(request)
     producto = Producto.objects.get(pk=producto_id)
     carritoCompras.agregar(producto)
     return redirect("carrito")
+
+def agregar_producto_favoritos(request, producto_id):
+    favoritos = Favorito(request)
+    producto = Producto.objects.get(id=producto_id)
+    favoritos.agregar(producto)
+    producto.popularidad += 1
+    producto.save()
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def limpiar_carrito(request):
     carritoCompras = Carrito(request)
     carritoCompras.limpiar()
     return redirect("carrito")
 
-def eliminar_producto(request, producto_id):
+def eliminar_producto_carrito(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(pk=producto_id)
     carrito.eliminar(producto)
     return redirect("carrito")
+
+def eliminar_producto_favoritos(request, producto_id):
+    favoritos = Favorito(request)
+    producto = Producto.objects.get(id=producto_id)
+    favoritos.eliminar(producto)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+def actualizar_carrito(request):
+    carro = Carrito(request)
+    for key in carro.carrito.keys():
+        newCant =  request.GET.get(key, '')
+        carro.actualizarCantidad(key, newCant)
+    return redirect("carrito")
+    

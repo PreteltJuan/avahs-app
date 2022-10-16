@@ -40,7 +40,6 @@ class Carrito:
                 "acumulado": producto.precio,
                 "precio": producto.precio,
                 "cantidad": 1,
-
             }
         else:
             self.carrito[id]["cantidad"] += 1
@@ -78,4 +77,9 @@ class Carrito:
         id = str(producto.pk)
         if id in self.carrito:
             del self.carrito[id]
+            self.guardar_carrito()
+
+    def actualizarCantidad(self, id, cant):
+        if id in self.carrito:
+            self.carrito[id]['cantidad'] = cant
             self.guardar_carrito()
