@@ -39,7 +39,7 @@ class Carrito:
                 "nombre": producto.nombre,
                 "acumulado": producto.precio,
                 "precio": producto.precio,
-                "cantidad": 1,
+                "cantidad": int(1),
 
             }
         else:

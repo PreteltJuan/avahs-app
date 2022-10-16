@@ -69,6 +69,8 @@ def carrito(request):
     return  render(request, "pages/carrito.html")
 
 
+def compra(request):
+    return render(request, "pages/compra.html" )
 
 
 
