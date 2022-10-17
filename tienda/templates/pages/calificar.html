@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/reviews.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+ {% endblock %} 
+
+{% block body %}
+
+<main>
+    <h1 class="calificar">Califica la pagina</h1>
+
+    <form action="{% url 'calificar'%}" method="POST">
+
+      {% csrf_token %}
+      <div class="box">
+
+        <label >Como calificas nuestra aplicacion?</label>
+        <br><br>
+        <div class="rate">
+          <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10" title="5"></label>
+          <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9" title="4.5" class="half"></label>
+          <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8" title="4"></label>
+          <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7" title="3.5" class="half"></label>
+          <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6" title="3"></label>
+          <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5" title=""2.5 class="half"></label>
+          <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4" title="2"></label>
+          <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3" title="1.5" class="half"></label>
+          <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2" title="1"></label>
+          <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1" title="0.5" class="half"></label>
+
+          
+        </div><br><br>
+        Nombre 
+        <input type="text" class="form-control" name="name">
+        <br>
+        <br>
+        Reseña
+        <textarea name="review" id="" rows="4"></textarea>
+        <br>
+        <input type="submit" value="Enviar Reseña" class="boton">
+        <br>
+      </div>
+      
+      <br>
+      <div class="mensaje">{{mensaje}}</div>
+        
+    </form>
+    
+
+
+
+</main>
+{% endblock %}
