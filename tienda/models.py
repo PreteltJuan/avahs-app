@@ -60,3 +60,23 @@ class DetalleFactura(models.Model):
     subTotal =  models.IntegerField(default=0)
     def __str__(self):
         return self.nombre
+    
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=50)
+    correo = models.EmailField()
+    consulta = models.IntegerField(choices=opciones_consultas)
+    mensaje = models.TextField()
+    avisos = models.BooleanField()
+    def _str_(self):
+        return self.nombre
+
+class calificar(models.Model):
+    rating = models.FloatField(default=0)
+    name = models.CharField(max_length=100)
+    review = models.TextField(max_length=500, blank=True)
+    status = models.BooleanField(default=True)
+    """ created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True) """
+    def _str_(self):
+        return self.name
+
