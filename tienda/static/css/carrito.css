@@ -24,7 +24,7 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fafaf9;
+    background-color: var(--color2);
     width: 60vw;
     height: 14vh;
     padding: 20px 20px;
@@ -47,10 +47,16 @@ main{
     color: white;
     padding: 2% 4%;
     border-radius: 6px;
-    background-color: #3e5264;
+    background-color: var(--color3);
     text-align: center;
+    text-transform: uppercase;
 }
 
+
+.content-header a:hover{
+    cursor:pointer;
+    background-color: var(--color5);
+}
 
 .content-middle{
     width: 100%;
@@ -70,7 +76,7 @@ main{
 .tabla th{
     padding: 16px 0px;
     font-size: 16rem;
-    background-color: #f2e3da;
+    background-color: var(--color4);
 }
 
 .tabla td{
@@ -90,7 +96,7 @@ main{
 
 
 .botones-carrito-container a{
-    background-color: #3e5264;
+    background-color: var(--color3);
     width: 200px;
     height: 40px;
     border-radius: 4px;
@@ -102,10 +108,11 @@ main{
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 .botones-carrito-container button{
-    background-color: #3e5264;
+    background-color: var(--color3);
     width: 200px;
     height: 40px;
     border-radius: 4px;
@@ -117,11 +124,18 @@ main{
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 .botones-carrito-container a:hover{
-    background-color: #34414d;
+    background-color: var(--color5);
 }
+
+.botones-carrito-container button:hover{
+    cursor:pointer;
+    background-color: var(--color5);
+}
+
 
 .botones-carrito-container a:disabled{
     background-color: #f2e3da;
@@ -163,7 +177,7 @@ main{
 
 
 .content-bottom .content .tabla td:first-child{
-    background-color: #f2e3da;
+    background-color: var(--color4);
     width: 40%;
     padding: 5% 4%;
     border: 0.5px solid rgb(206, 212, 218);
@@ -177,8 +191,8 @@ main{
 
 
 .content-bottom .content a{
-    background-color: #3e5264;
-    border-color: #3e5264;
+    background-color: var(--color3);
+    border-color: var(--color3);
     margin: 30px 0px;
     width: 200px;
     height: 40px;
@@ -190,6 +204,12 @@ main{
     text-decoration: none;
     font-size: 15rem;
     align-self: center;
+    text-transform: uppercase;
+}
+
+.content-bottom .content a:hover{
+    cursor:pointer;
+    background-color: var(--color5);
 }
 
 

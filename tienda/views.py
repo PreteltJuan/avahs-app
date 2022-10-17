@@ -175,9 +175,12 @@ def eliminar_producto_favoritos(request, producto_id):
 
 def actualizar_carrito(request):
     carro = Carrito(request)
+
     for key in carro.carrito.keys():
         newCant =  request.GET.get(key, '')
-        carro.actualizarCantidad(key, newCant)
+        carro.actualizarCantidad(key, int(newCant))
+
+    carro.actualizarSubTotal()
     return redirect("carrito")
     
 def realizar_compra(request):
@@ -199,6 +202,6 @@ def realizar_compra(request):
         )
         detallerFactura.save()
     
-
+    carritoCompras.limpiar()
     
     return redirect("home")

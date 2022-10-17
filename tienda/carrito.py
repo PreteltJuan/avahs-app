@@ -67,11 +67,10 @@ class Carrito:
         self.guardar_carrito()
 
     def actualizarSubTotal(self):
-        total = 0
+        total = 0   
         for key,value in self.carrito.items():
             total += int(value["acumulado"])
         self.subTotal = total
-
     
     def eliminar(self, producto):
         id = str(producto.pk)
@@ -80,6 +79,8 @@ class Carrito:
             self.guardar_carrito()
 
     def actualizarCantidad(self, id, cant):
-        if id in self.carrito:
+        if id in self.carrito.keys():
             self.carrito[id]['cantidad'] = cant
+            self.carrito[id]['acumulado'] = cant * self.carrito[id]['precio']
             self.guardar_carrito()
+        

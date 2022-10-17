@@ -4,6 +4,7 @@
 }
 
 .content{
+    width: 60%;
     margin: 50px 0px;
     display: flex;
     flex-direction: column;
@@ -79,18 +80,22 @@
 
 .button{
     height: 60px;
-    width: 100%;
+    width: 40%;
     border-radius: 4px;
     border: 1px solid rgb(206, 212, 218);
-    font-size: 18rem;
-    background-color: #3e5264;
+    font-size: 14rem;
+    background-color: var(--color3);
     margin: 32px 0px;
     color: rgb(255, 255, 255);
+    text-transform: uppercase;
 }
 
 .button:hover{
-    background-color: #292d33;
+    cursor:pointer;
+    background-color: var(--color5);
 }
+
+
 
 @media (min-width:720px){
     .contenedor-input{

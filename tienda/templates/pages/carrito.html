@@ -22,6 +22,7 @@
             </div>
             <div class="content-middle">
                 {% if request.session.carrito.items %}
+                <form action="{% url 'actualizarCarrito' %}" method="get">
                     <table class="tabla">
                         <tr>
                             
@@ -31,7 +32,7 @@
                             <th>Subtotal</th>
                             <th></th>
                         </tr>
-                    <form action="{% url 'actualizarCarrito' %}" method="get">
+                
                     {% for key,value in request.session.carrito.items %}
                         <tr>
                             <td>{{ value.nombre }}</td>

@@ -15,20 +15,6 @@ var linea1 = document.getElementById("line-menu-icon")
 var linea2 = document.getElementById("line-menu-icon-2")
 
 
-function ocultarFind() {
-    if (estado_find) {
-        find.classList.remove("find-show");
-        find.classList.add("find-hidden");
-    } else {
-        find.classList.remove("find-hidden");
-        find.classList.add("find-show");
-        if (estado_menu_lateral) {
-            majenarMenuOpciones()
-        }
-    }
-    estado_find = !estado_find
-}
-
 
 
 function manejarMenuOpciones() {
@@ -121,6 +107,25 @@ function resize_menu_favoritos() {
 
 
 
+
+function ocultarFind() {
+    if (estado_find) {
+        find.classList.remove("find-show");
+        find.classList.add("find-hidden");
+    } else {
+        find.classList.remove("find-hidden");
+        find.classList.add("find-show");
+        if (estado_menu_lateral) {
+            manejarMenuOpciones()
+
+        }
+
+        if(estado_menu_favoritos){
+            manejarMenuFavoritos()
+        }
+    }
+    estado_find = !estado_find
+}
 
 
 
