@@ -9,8 +9,9 @@ urlpatterns = [
     path("descuentos", views.descuentos, name="descuentos"),
     path("producto/<nombre_p>", views.producto),
     path("resultados", views.resultados, name="resultados"),
-    path("login", views.login),
-    path("registro", views.registro),
+    path("login", views.login, name="login"),
+    path("logout", views.logout, name="logout"),
+    path("registro", views.registro, name="registro"),
     path("carrito", views.carrito, name="carrito"),
     path("compra", views.compra, name="compra"),
     path('agregarCarrito/<int:producto_id>/', views.agregar_producto_carrito, name="agregarAlCarrito"),
@@ -19,5 +20,6 @@ urlpatterns = [
     path('eliminarFavorito/<int:producto_id>/', views.eliminar_producto_favoritos, name="eliminarFavorito"),
     path('limpiar', views.limpiar_carrito, name="limpiar"),
     path('actualizarCarrito', views.actualizar_carrito, name="actualizarCarrito"),
+    path('realizarCompra', views.realizar_compra, name="realizarCompra"),
 ]
 

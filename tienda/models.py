@@ -1,10 +1,11 @@
 from distutils.command.upload import upload
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
 class Producto(models.Model):
-    idProducto = models.AutoField(primary_key=True)
+    idProducto = models.AutoField(primary_key=True, null=False), 
     nombre = models.CharField(max_length=50)
     precioAnterior = models.IntegerField(default=0)
     precio = models.IntegerField(default=0)
@@ -17,14 +18,11 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
+
+
 class Usuario(User):
-    #idUsuario = models.AutoField(primary_key=True)
-    #primer_nombre = models.CharField(max_length=40, null=True)
     segundo_nombre = models.CharField(max_length=40, null=True)
-    #primer_apellido = models.CharField(max_length=40, null=True)
     segundo_apellido = models.CharField(max_length=40, null=True)
-    #correo = models.CharField(max_length=100, null=True)
-    #clave = models.CharField(max_length=100, null=True)
     direccion = models.CharField(max_length=128)
     barrio = models.CharField(max_length=64)
     fecha_nacimiento = models.DateField()
@@ -44,3 +42,21 @@ class Usuario(User):
 
     def __str__(self):
         return self.primer_nombre
+
+
+class Factura(models.Model):
+    idFactura = models.AutoField(primary_key=True, null=False), 
+    idUsuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    total = models.IntegerField(default=0)
+    fecha = models.DateField(null=True)
+    def __str__(self):
+        return self.idFactura
+
+class DetalleFactura(models.Model):
+    idFactura =  models.ForeignKey(Factura, on_delete=models.CASCADE)
+    idProducto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    precio = models.IntegerField(default=0)
+    cantidad = models.IntegerField(default=0)
+    subTotal =  models.IntegerField(default=0)
+    def __str__(self):
+        return self.nombre

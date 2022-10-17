@@ -15,24 +15,29 @@
                 <h2>Datos de contacto</h2>
                 <div class="content">
                     <label for="">Nombres:  </label>
-                    <label for="">Juan</label> 
-                    <label for="">Pablo</label>
+                    <label for="">{{ usuario.first_name }}</label> 
+                    <label for="">{{ usuario.segundo_nombre }}</label>
                 </div>
                 <div class="content">
                     <label for="">Apellidos:  </label>
-                    <label for="">Pretelt</label>
+                    <label for="">{{ usuario.last_name }}</label>
+                    <label for="">{{ usuario.segundo_apellido }}</label>
+                </div>
+                <div class="content">
+                    <label for="">Usuario:  </label>
+                    <label for="">{{ usuario.username }}</label>
                 </div>
                 <div class="content">
                     <label for="">Email:  </label>
-                    <label for="">Pretelt678934@gmail.com</label>
+                    <label for="">{{ usuario.email }}</label>
                 </div>
                 <div class="content">
                     <label for="">Ciudad, Barrio:  </label>
-                    <label for="">Medellín, </label><label for="">Bello</label>
+                    <label for="">Medellín, </label><label for="">{{ usuario.barrio }}</label>
                 </div>
                 <div class="content">
                     <label for="">Dirección:  </label>
-                    <label for="">Calle 23 #56-46</label>
+                    <label for="">{{ usuario.direccion }}</label>
                 </div>
                 
             </div>
@@ -44,16 +49,50 @@
                     <div class="info-productos">
                         <div class="datos-productos">
                           <div class="nombre-productos">
-                            <span>Sudadera roja clásica</span>
+                            <span>Nombre</span>
                           </div>
                           <div class="precio-productos">
-                            <span>$120.000</span>
+                            <span>Unidades</span>
+                          </div>
+                          <div class="precio-productos">
+                            <span>Total</span>
+                          </div>
+                        </div>
+                      </div>
+                </div> 
+                {% for key,value in request.session.carrito.items %}
+                <div class="content">
+                    <div class="info-productos">
+                        <div class="datos-productos">
+                          <div class="nombre-productos">
+                            <span>{{ value.nombre }}</span>
+                          </div>
+                          <div class="precio-productos">
+                            <span>{{ value.cantidad }}</span>
+                          </div>
+                          <div class="precio-productos">
+                            <span>${{ value.acumulado }}</span>
+                          </div>
+                        </div>
+                      </div>
+                </div>  
+                {% endfor%}
+                
+                <div class="content">
+                    <div class="info-productos">
+                        <div class="datos-productos">
+                          <div class="nombre-productos">
+                            <span>Total:</span>
+                          </div>
+                         
+                          <div class="precio-productos">
+                            <span>${{ request.session.subTotal }}</span>
                           </div>
                         </div>
                       </div>
                 </div>
                 <div class="boton-pagar">
-                    <button>CONFIRMAR</button>
+                    <a href="{% url 'realizarCompra'  %} ">CONFIRMAR</a>
                 </div>
             </div>
         </div>

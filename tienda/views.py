@@ -1,9 +1,9 @@
 
 from django.shortcuts import render, redirect
-
+from datetime import date
 from .favorito import Favorito
 from .carrito import Carrito
-from .models import Producto, Usuario
+from .models import DetalleFactura, Producto, Usuario, Factura
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 
@@ -37,8 +37,6 @@ def descuentos(request):
 
 def tendencias(request):
     return render(request, "pages/secciones/tendencias.html")
-
-
 
 def resultados(request):
     text = request.GET.get('search', '')
@@ -122,7 +120,6 @@ def registro(request):
 
     return render(request, "pages/registro_login/registro.html", {"error":error})
 
-
 def producto(request, nombre_p ):
     producto = Producto.objects.get(nombre=nombre_p)
     data = {
@@ -130,17 +127,19 @@ def producto(request, nombre_p ):
     } 
     return  render(request, "pages/producto.html", data)
 
-
 def carrito(request):
     return  render(request, "pages/carrito.html")
 
-
 def compra(request):
-    return render(request, "pages/compra.html" )
-
-
-
-
+    if not request.user.is_authenticated:
+        return redirect("login")
+    
+    usuario = Usuario.objects.get(username=request.user)
+    
+    data = {
+        'usuario': usuario,
+    } 
+    return render(request, "pages/compra.html", data )
 
 
 def agregar_producto_carrito(request, producto_id):
@@ -181,3 +180,25 @@ def actualizar_carrito(request):
         carro.actualizarCantidad(key, newCant)
     return redirect("carrito")
     
+def realizar_compra(request):
+    usuario = Usuario.objects.get(username=request.user)
+    carritoCompras = Carrito(request)
+    factura = Factura(
+        idUsuario = usuario,
+        total = carritoCompras.subTotal,
+        fecha = date.today())
+    factura.save()
+    for key,value in carritoCompras.carrito.items():
+        producto = Producto.objects.get(id = key)
+        detallerFactura =  DetalleFactura(
+            idFactura = factura,
+            idProducto = producto,
+            precio = producto.precio,
+            cantidad = value["cantidad"],
+            subTotal = value["acumulado"],
+        )
+        detallerFactura.save()
+    
+
+    
+    return redirect("home")
