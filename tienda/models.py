@@ -60,7 +60,14 @@ class DetalleFactura(models.Model):
     subTotal =  models.IntegerField(default=0)
     def __str__(self):
         return self.nombre
+
     
+ opciones_consultas =[
+    [0,"consulta"],
+    [1,"reclamo"],
+    [2,"sugerencia"],
+]
+
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50)
     correo = models.EmailField()
