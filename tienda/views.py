@@ -48,6 +48,36 @@ def resultados(request):
     } 
     return  render(request, "pages/resultados.html", data)
 
+def contacto(request):
+    data = {
+        'form': formularioContacto()
+    }
+    if request.method == 'POST':
+        formulario = formularioContacto(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"]="mensaje enviado"
+        else:
+            data["form"]= formulario
+            
+    return render(request, 'pages/contacto.html',data)
+
+def calificar(request):
+    data = {
+        'form': calificacion()
+    }
+    if request.method == 'POST':
+        formulario = calificacion(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"]="Reseña enviada"
+        else:
+            data["form"]= formulario
+            
+    return render(request, 'pages/calificar.html',data)
+
+
+
 def login(request):
 
     if request.user.is_authenticated:
