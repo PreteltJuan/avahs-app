@@ -9,7 +9,25 @@
 {% block body %} 
 <div class="main">
     <div class="container">
-
+      {%if estado == 1 %}
+        <div class="aviso">
+          <div class="mensaje">
+            <span>La compra se realizó exitosamente</span>
+          </div>
+          <div class="opciones">
+            <a href="{% url 'home'  %} ">Aceptar</a>
+          </div>
+        </div>
+      {%elif estado == 2%}
+      <div class="aviso">
+        <div class="mensaje">
+          <span>La compra no se pudo realizar</span>
+        </div>
+        <div class="opciones">
+          <a href="{% url 'compra'  %} ">Aceptar</a>
+        </div>
+      </div>
+      {%endif%}
         <div class="left">
             <div class="contacto">
                 <h2>Datos de contacto</h2>
@@ -92,7 +110,7 @@
                       </div>
                 </div>
                 <div class="boton-pagar">
-                    <a href="{% url 'realizarCompra'  %} ">CONFIRMAR</a>
+                    <a href="{% url 'realizarCompra'  %} ">CONFIRMAR </a>
                 </div>
             </div>
         </div>

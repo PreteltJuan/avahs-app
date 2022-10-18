@@ -62,7 +62,7 @@ class DetalleFactura(models.Model):
         return self.nombre
 
     
- opciones_consultas =[
+opciones_consultas =[
     [0,"consulta"],
     [1,"reclamo"],
     [2,"sugerencia"],

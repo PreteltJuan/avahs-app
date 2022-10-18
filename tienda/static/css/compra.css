@@ -16,6 +16,7 @@
     padding: 0px 40px;
     display: flex;
     justify-content: center;
+    background-color: var(--color2);
 }
 
 .right{
@@ -23,6 +24,7 @@
     padding: 0px 40px;
     display: flex;
     justify-content: center;
+    background-color: var(--color2);
 }
 
 .contacto{
@@ -85,8 +87,8 @@
     padding: 24px 0px;
 }
 
-.boton-pagar button{
-    background-color: #3e5264;
+.boton-pagar a{
+    background-color: var(--color3);
     width: 200px;
     height: 40px;
     border-radius: 4px;
@@ -98,4 +100,60 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.boton-pagar a:hover{
+    background-color: var(--color5);
+}
+
+.aviso{
+    height: 40vh;
+    width: 80vw;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    background-color:  var(--color4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+
+.mensaje{
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.mensaje span{
+    font-size: 20rem;
+    text-transform: uppercase;
+    text-align: center;
+    
+}
+
+.opciones{
+    margin-top: 16px;
+}
+.opciones a{
+    background-color: var(--color3);
+    width: 40px;
+    font-size: 16rem;
+    margin-bottom: 8px;
+    border: 1px solid rgb(206, 212, 218);
+    outline: none;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    margin: 0px 8px;
+    border-radius: 6px;
+    background-color: var(--color3);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.opciones a:hover{
+    background-color: var(--color5);
 }

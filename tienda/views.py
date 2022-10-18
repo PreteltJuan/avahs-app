@@ -1,4 +1,5 @@
 
+from symbol import return_stmt
 from django.shortcuts import render, redirect
 from datetime import date
 from .favorito import Favorito
@@ -216,6 +217,11 @@ def actualizar_carrito(request):
 def realizar_compra(request):
     usuario = Usuario.objects.get(username=request.user)
     carritoCompras = Carrito(request)
+    for key,value in carritoCompras.carrito.items():
+        producto = Producto.objects.get(id = key)
+        if producto.unidades < value["cantidad"]:
+            return render(request, "pages/compra.html", {'estado': 2} )
+
     factura = Factura(
         idUsuario = usuario,
         total = carritoCompras.subTotal,
@@ -223,6 +229,7 @@ def realizar_compra(request):
     factura.save()
     for key,value in carritoCompras.carrito.items():
         producto = Producto.objects.get(id = key)
+        producto.unidades -= value["cantidad"]
         detallerFactura =  DetalleFactura(
             idFactura = factura,
             idProducto = producto,
@@ -231,7 +238,8 @@ def realizar_compra(request):
             subTotal = value["acumulado"],
         )
         detallerFactura.save()
+        producto.save()
     
     carritoCompras.limpiar()
     
-    return redirect("home")
+    return render(request, "pages/compra.html", {'estado': 1} )
