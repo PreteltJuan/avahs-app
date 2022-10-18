@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .carrito import Carrito
-from .models import Producto, Usuario
+from .models import Factura, Producto, Usuario
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 def home(request):
@@ -146,3 +146,7 @@ def eliminar_producto(request, producto_id):
     producto = Producto.objects.get(pk=producto_id)
     carrito.eliminar(producto)
     return redirect("carrito")
+
+def test(request):
+    facturas = Factura.objects.all()
+    return render(request, "pages/test.html", {"facturas": facturas})

@@ -43,3 +43,17 @@ class Usuario(User):
 
     def __str__(self):
         return self.primer_nombre
+
+class Factura(models.Model):
+    idFactura = models.AutoField(primary_key=True)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    precio = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'Factura #{self.idFactura} - {self.precio}$'
+
+class ProductoComprado(models.Model):
+    idProductoComprado = models.AutoField(primary_key=True)
+    idProducto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    idFactura = models.ForeignKey(Factura, related_name="productos_comprados", on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=0)

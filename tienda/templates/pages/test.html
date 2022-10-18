@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <p style="font-size:16px">Barrios con mas productos comprados</p>
+    <div>
+        <canvas id="chart"></canvas>
+    </div>
+    <p style="font-size:16px; margin-top: 40px">Titulo analitica</p>
+    <div>
+        <canvas id="chart2"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{%block extraScript%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const colores = ["red", "blue", "green", "yellow", "purple", "aqua", "pink", "orange", "violet", "brown"]
+
+    window.facturas = [
+        {% for factura in facturas %}{
+            user: "{{factura.idUsuario.username}}",
+            precio: {{factura.precio}},
+            barrio: "{{factura.idUsuario.barrio}}",
+            cantidadProductos: {{factura.productos_comprados.all|length}},
+            sexo: "{{factura.idUsuario.sexo}}"
+        },
+        {% endfor %}
+    ]
+
+    const prepararBarrios = () => {
+        const barrios = new Map()
+        for (const factura of facturas){
+            const {barrio, cantidadProductos} = factura
+
+            if (!barrios.has(barrio)){
+                barrios.set(barrio, cantidadProductos)
+            }else{
+                const cantidadPrevia = barrios.get(barrio)
+                barrios.set(barrio, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasBarriosIterador = barrios.entries()
+        const tuplasBarrios = [...tuplasBarriosIterador]
+        tuplasBarrios.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const barriosMasComprados = tuplasBarrios.slice(0, 10)
+        return barriosMasComprados
+    }
+    
+    const prepararSexos = () => {
+        const sexos = new Map()
+        for (const factura of facturas){
+            const {sexo, cantidadProductos} = factura
+
+            if (!sexos.has(sexo)){
+                sexos.set(sexo, cantidadProductos)
+            }else{
+                const cantidadPrevia = sexos.get(sexo)
+                sexos.set(sexo, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasSexosIterador = sexos.entries()
+        const tuplasSexos = [...tuplasSexosIterador]
+        tuplasSexos.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const sexosMasComprados = tuplasSexos.slice(0, 3)
+        console.log(sexosMasComprados)
+        return sexosMasComprados
+    }
+
+    const crearPrimeraGrafica = (datos) => {
+        const canvas = document.querySelector("#chart")
+        const data = {
+            labels: datos.map(([barrio]) => barrio),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'doughnut',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+    const crearSegundaGrafica = (datos) => {
+        const canvas = document.querySelector("#chart2")
+        const data = {
+            labels: datos.map(([sexo]) => sexo),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'doughnut',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+    const datos1 = prepararBarrios() 
+    crearPrimeraGrafica(datos1)
+
+    const datos2 = prepararSexos()
+    crearSegundaGrafica(datos2)
+
+</script>
+{% endblock %}
+

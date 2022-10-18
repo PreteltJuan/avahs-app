@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Producto
-from .models import Usuario
+from .models import Producto, Usuario, Factura, ProductoComprado
 # Register your models here.
 
 
@@ -8,13 +7,19 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = ["nombre","precio", "idProducto"]
     list_editable = ["precio"]
     search_fields = ["nombre"]
-    list_per_page = 5
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "segundo_nombre"]
+    list_display = ["first_name", "segundo_nombre", "barrio"]
     search_fields = ["firts_name", "segundo_nombre"]
-    list_per_page = 5
-    
+
+class FacturaAdmin(admin.ModelAdmin):
+    list_display = ["idFactura", "idUsuario", "precio"]
+
+class ProductoCompradoAdmin(admin.ModelAdmin):
+    list_display = ["idProductoComprado", "idFactura", "idProducto", "cantidad"]
 
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(Factura, FacturaAdmin)
+admin.site.register(ProductoComprado, ProductoCompradoAdmin)
+
