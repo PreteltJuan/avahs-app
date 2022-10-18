@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 class Producto(models.Model):
@@ -40,6 +41,11 @@ class Usuario(User):
     @property
     def correo(self):
         return self.email
+    
+    @property
+    def edad(self):
+        today = datetime.datetime.now()
+        return today.year - self.fecha_nacimiento.year
 
     def __str__(self):
         return self.primer_nombre

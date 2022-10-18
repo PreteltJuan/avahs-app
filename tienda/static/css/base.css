@@ -1,3 +1,16 @@
+:root {
+    --color1: black;
+    --color2: #fffffc;
+    --color3: #A2708A; /*Fondos header y botones*/
+    --color4: #F8BFC2; /*fondos cabeceras de tablas*/
+
+
+    --color6: #BEB7A4;
+   
+    --color5: #A45CA8; /* Hover para botones*/
+  }
+
+
 html {
     font-size:6.25%;
 }
@@ -15,7 +28,7 @@ header{
     height: 20vh;
     position: sticky;
     top: 0px;
-    background-color: white;
+    background-color: var(--color2);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -27,10 +40,10 @@ h1{
 
 .top-header{
     flex-basis: 25%;
-    background-color: #292d33;
+    background-color: var(--color3);
     margin: 0;
     padding: 0;
-    color: azure;
+    color: var(--color2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,7 +87,7 @@ h1{
 
 
 .top-header-content-1 a{
-    color: azure;
+    color: var(--color2);
 }
 
 
@@ -87,7 +100,7 @@ h1{
     align-items: center;
     border-bottom: 1px solid rgb(206, 212, 218);
     position: relative;
-    background-color: white;
+    background-color: var(--color2);
     z-index: 10;
 }
 
@@ -98,13 +111,13 @@ h1{
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid rgb(206, 212, 218);
-    background-color: white;
+    background-color: var(--color2);
     z-index: 10;
 }
 
 .top-2 a{
     text-decoration: none;
-    color: black;
+    color: var(--color1);
     align-self: center;
     text-transform: uppercase;
 }
@@ -120,7 +133,7 @@ h1{
 .line-menu-icon{
     width: 35px;
     height: 2px;
-    background-color: black;
+    background-color: var(--color1);
     margin: 10px 0px;
 }
 
@@ -159,7 +172,7 @@ h1{
 
 .top a{
     text-decoration: none;
-    color: black;
+    color: var(--color1);
     text-transform: uppercase;
 }
 
@@ -181,6 +194,14 @@ h1{
 .icons{
     padding: 0 3px;
 }
+
+.icons-selected{
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -196,14 +217,14 @@ nav{
     justify-content: space-around;
     border-bottom: 1px solid rgb(206, 212, 218);
     position: relative;
-    background-color: white;
+    background-color: var(--color2);
     z-index: 10;
 }
 
 nav a{
     outline: none;
     text-decoration: none;
-    color: black;
+    color: var(--color1);
     padding: 0px 50px;
     font-size: 16rem;
 }
@@ -221,7 +242,7 @@ nav a:hover{
     border-bottom: 1px solid rgb(206, 212, 218);
     position: absolute;
     top: -50px;
-    background-color: white;
+    background-color: var(--color2);
     z-index: 5;
     transition: all .5s ease;
 }
@@ -232,7 +253,7 @@ nav a:hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
+    background-color: var(--color2);
 }
 
 .find-hidden{
@@ -262,8 +283,8 @@ nav a:hover{
 }
 
 .busqueda button{
-    background-color: #3e5264;
-    border-color: #3e5264;
+    background-color: var(--color3);
+    border-color: var(--color3);
     border: none;
     margin: 30px 0px;
     margin-right: 10%;
@@ -271,13 +292,14 @@ nav a:hover{
     min-width: 100px;
     height: 30px;
     border-radius: 6px;
-    color: white;
+    color: var(--color2);
     text-decoration: none;
     font-size: 15rem;
 }
 
 .busqueda button:hover{
     cursor:pointer;
+    background-color: var(--color5);
 }
 
 .menu-lateral{
@@ -286,7 +308,7 @@ nav a:hover{
     position: fixed;
     top: 20vh;
     left: -31vw;
-    background-color: white;
+    background-color: var(--color2);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -295,6 +317,50 @@ nav a:hover{
     overflow-y: scroll;
 }
 
+.favoritos{
+    width: 15vw;
+    height: 80vh;
+    position: fixed;
+    top: 20vh;
+    right: -41vw;
+    background-color: var(--color2);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    transition: all .5s ease;
+    border-left:  1px solid rgba(65, 67, 70, 0.13);
+    overflow-y: scroll;
+}
+
+.info-producto{
+    width: 100%;
+    display: flex;
+    padding: 15px 5px;
+
+}
+
+.info-producto .datos{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.info-producto .datos .nombre{
+    text-transform: uppercase;
+    font-size: 15rem;
+}
+
+.info-producto .datos .precio{
+    font-size: 15rem;
+}
+
+.acciones{
+    display: flex;
+    justify-content: space-around;
+    
+    margin-bottom: 15px;
+}
 
 .content-menu-lateral{
     width: 75%;
@@ -318,7 +384,7 @@ nav a:hover{
 .horizontal-bar{
     width: 100%;
     height: 2px;
-    background-color: black;
+    background-color: var(--color1);
     border-radius: 40px;
     margin: 10px 0px;
 }
@@ -392,8 +458,8 @@ footer{
 }
 
 .newsletter-invitation a{
-    background-color: #3e5264;
-    border-color: #3e5264;
+    background-color: var(--color3);
+    border-color: var(--color3);
     margin: 30px 0px;
     width: 200px;
     height: 40px;
@@ -406,6 +472,9 @@ footer{
     font-size: 15rem;
 }
 
+.newsletter-invitation a:hover{
+    background-color: var(--color5);
+}
 
 .follow-us{
     display: flex;
@@ -449,7 +518,7 @@ footer{
 }
 
 .footer-middle-content{
-    background-color: #f2e3da;
+    background-color: var(--color4);
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -477,7 +546,7 @@ footer{
 
 .footer-bottom-content{
     width: 100%;
-    background-color: #292d33;
+    background-color: var(--color3);
     display: flex;
     align-items: center;
     justify-content: space-around;

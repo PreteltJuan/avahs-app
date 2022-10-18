@@ -147,6 +147,6 @@ def eliminar_producto(request, producto_id):
     carrito.eliminar(producto)
     return redirect("carrito")
 
-def test(request):
+def analitica(request):
     facturas = Factura.objects.all()
-    return render(request, "pages/test.html", {"facturas": facturas})
+    return render(request, "pages/analitica.html", {"facturas": facturas})
