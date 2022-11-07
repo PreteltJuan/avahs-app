@@ -33,7 +33,6 @@
     width: 40%;
     height: 80;
     padding: 20px;
-    background: white;
     justify-content: center;
     align-items: center;
      border-radius: 10px;
@@ -45,12 +44,14 @@
 }
 
 .button{
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding: 10px;
+    background: #A45CA8;
     border: none;
-    outline: none;
-    padding: 15px;
-    width: 200px;
-    background:  #A2708A;
-    border-radius: 2px;
+    cursor: pointer;
+    border-radius: 20px;
 
 
 }
@@ -58,3 +59,12 @@
     transform: scale(1.05);
     box-shadow: rgba(0, 0, 0, 9)0px 0px 10px;
 }
+.mensaje{
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    background:  #A2708A;
+    border: 2px solid black;
+    border-radius: 7px;
+    margin: 10px 0;
+  }
