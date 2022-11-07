@@ -1,176 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{% extends "base.html" %} 
+{% load static %} 
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link rel="stylesheet" href="{% static 'css/contacto.css' %}" />
-    {% block styles %} {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/contacto.css' %}" />
+ {% endblock %} 
+
+{% block body %}
+
+<main>
+      <div class="container">
+        <form action="{% url 'contacto'%}" method="POST">
+          {% csrf_token %}
+          <h1>Contactanos</h1>
+          <input type="text" name="nombre" value="{% if request.user.is_authenticated %}{{request.user.username}}{% endif %}" placeholder="Nombre">
+          <input type="text" name="correo" placeholder="Correo">
+          <select name="consulta" id="consulta">
+            <option value="Consulta" name="consulta">Consulta</option>
+            <option value="Reclamo" name="consulta">Reclamo</option>
+            <option value="Sugerencia" name="consulta">Sugerencia</option>
+          </select>
+          <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
+          <input type="submit" value="Enviar Mensaje" class="button">
+    </form>
     
-    <title>{% block titulo %}Avahs  {% endblock %}</title>
-  </head>
-  <body>
-    <header>
-      <div class="top-header">
-        <div class="top-header-content-1" id="top-header-content-1">
-          <p>¿Ya eres cliente? <a href="{% url 'login' %}"> entra</a></p>
-        </div>
-        <div class="top-header-content-2" id="top-header-content-2">
-          <p>Envíos gratis desde $100.000</p>
-        </div>
-        <div class="top-header-content-3" id="top-header-content-3">
-          <p>Entregas a domicilios</p>
-        </div>
-      </div> 
-      <div class="top-2">
-          <a href="/app/home"> <h1>avahs </h1></a>
-      </div>
-      <div class="top">
-        <div onclick="mostrar()"  class="menu-icon">
-          <div class="line-menu-icon " id="line-menu-icon"></div>
-          <div class="line-menu-icon " id="line-menu-icon-2"></div>
-        </div>
-        <a href="/app/home"> <h1>avahs </h1></a>
-        <div class="right-icons">
-          <span style="font-size: 20px"> {% if request.user.is_authenticated %}
-            {{request.user.username}}
-            {% endif %}
-          </span>
-          <span onclick="ocultarFind()"  class="material-symbols-outlined icons">search</span>
-          
-          {% if request.user.is_authenticated %}
-          <a href="{%url "logout"%}"><span class="material-symbols-outlined icons">logout</span></a>
-          {%else%}
-          <a href="{%url "login"%}"><span class="material-symbols-outlined icons">person</span></a>
-          {% endif %}
-
-          <span class="material-symbols-outlined icons">favorite</span>
-          <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
-          
-        </div>
-      </div>
-
-      <nav class="nav-bar">
-        <a href="{% url 'novedades' %}">Novedades</a>
-        <a href="{% url 'descuentos' %}">Descuentos</a>
-        <!-- <a href="/app/tendencias">Tendencias</a> -->
-      </nav>
-      <div id="find" class="find">
-        <form action="{% url 'resultados' %}" method="get" class="busqueda">
-          <input class="campo-texto" type="text" placeholder="Buscar productos..."  name="search">
-          <button >Buscar</button>
-        </form>
-      </div>
-    </header>
+  </div>
 
 
-    <div class="formulario">
-      <br>
-      <h2>Formulario de Contacto</h2>
-      <br>
-      <form action="" id="formulario" align="center" method="post" >
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" class="btn-primary" name="btnEnviar" id="btnEnviar" value="Enviar">
-      </form>
-    </div>
-    <br>
-    <div class="mensaje">
-      {{mensaje}}
-    </div>
-   
 
-
-    <div id="menu-lateral" class="menu-lateral"> 
-        <div class="content-menu-lateral">
-          <h3>avahs</h3>
-          <div class="sections">
-            <div class="horizontal-bar"></div>
-            <div class="link">
-              <a href="{% url 'novedades' %}">novedades</a>
-            </div>
-            <div class="horizontal-bar"></div>
-            <div class="link">
-              <a href="{% url 'descuentos' %}">descuentos</a>
-            </div>
-            <!-- <div class="horizontal-bar"></div>
-            <div class="link">
-              <a href="">tendencias</a>
-            </div> -->
-            <div class="horizontal-bar"></div>
-            <div class="link">
-              <a href="">contacto</a>
-            </div>
-            <div class="horizontal-bar"></div>
-          </div>
-          <div class="follow-us">
-            <span>Siguenos en:</span>
-            <div class="social-icons">
-                <a href="http://"><img src="{% static "images/icon-instagram.svg" %}"/></a>
-                <a href="http://"><img src="{% static "images/icon-facebook.svg" %}"/></a>
-            </div>
-          </div>
-        </div>
-    </div>
-    {% block body %}  
-    {% endblock %}
-  
-   
-    <footer>
-        <div class="footer-top-content">
-            <div class="line"> <div class="bar"></div> </div>
-            <div class="newsletter-invitation">
-                <span>¿Quieres estar al tanto de novedades, tendencias<br> y descuentos?</span> 
-                <a  href="http://">Quiero recibirlos</a>
-            </div>
-            <div class="line"> <div class="bar"></div> </div>
-            <div class="follow-us">
-                <span>Siguenos en:</span>
-                <div class="social-icons">
-                    <a href="http://"><img src="{% static "images/icon-instagram.svg" %}"/></a>
-                    <a href="http://"><img src="{% static "images/icon-facebook.svg" %}"/></a>
-                </div>
-            </div>
-           
-            <div class="envios">
-                <div class="envios-item">
-                    <a href="http://"><img src="{% static "images/entrega-domicilio.svg" %}"/></a>
-                    <span>entrega a domicilio</span>
-                </div>
-                <div class="envios-item">
-                    <a href="http://"><img src="{% static "images/envio-gratis.svg" %}"/></a>
-                    <span>envios gratis desde $100.000</span>
-                </div>
-                <div class="envios-item">
-                    <a href="http://"><img src="{% static "images/devolucion.svg" %}"/></a>
-                    <span>devoluciones 10 días</span>
-                </div>   
-            </div>
-        </div>
-        <div class="footer-middle-content">
-            <a href="">Contacto</a>
-            <a href="">Sobre nosotros</a>
-            <a href="">Politica de Cookies</a>
-            <a href="{% url 'calificar' %}">Calificanos</a>
-        </div>
-        <div class="footer-bottom-content">
-            <img src="{% static "images/tarjetas.svg" %}" alt="">
-            <span>© Copyright 2022 Avahs</span>
-        </div>
-    </footer>
-    <script src="{% static "scripts/base.js" %}"></script>
-    <script src="{% static "scripts/carrito.js" %}"></script>
-  </body>
-</html>
+</main>
+{% endblock %}

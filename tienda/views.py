@@ -1,10 +1,11 @@
 
-from symbol import return_stmt
+
 from django.shortcuts import render, redirect
+from  .forms import formularioContacto,calificacion
 from datetime import date
 from .favorito import Favorito
 from .carrito import Carrito
-from .models import DetalleFactura, Producto, Usuario, Factura
+from .models import DetalleFactura, Producto, Usuario, Factura,Contacto,Review
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 
@@ -51,7 +52,7 @@ def resultados(request):
 
 def contacto(request):
     data = {
-        'form': formularioContacto()
+        'formulario': formularioContacto()
     }
     if request.method == 'POST':
         formulario = formularioContacto(data=request.POST)

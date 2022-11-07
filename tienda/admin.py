@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Factura, Producto, Usuario, DetalleFactura
 from .models import Contacto
-from .models import calificar
+from .models import Review
 # Register your models here.
 
 
@@ -32,4 +32,4 @@ admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(DetalleFactura, DetalleFacturaAdmin)
 admin.site.register(Factura, FacturaAdmin)
 admin.site.register(Contacto)
-admin.site.register(calificar)
+admin.site.register(Review)
