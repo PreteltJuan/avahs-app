@@ -51,20 +51,26 @@ def resultados(request):
     return  render(request, "pages/resultados.html", data)
 
 def contacto(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
     data = {
-        'formulario': formularioContacto()
+        'form': formularioContacto()
     }
     if request.method == 'POST':
         formulario = formularioContacto(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"]="mensaje enviado"
+            data["mensaje"]="Enviado"
         else:
             data["form"]= formulario
             
     return render(request, 'pages/contacto.html',data)
 
 def calificar(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
     data = {
         'form': calificacion()
     }
