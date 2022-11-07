@@ -84,3 +84,13 @@ class Carrito:
             self.carrito[id]['acumulado'] = cant * self.carrito[id]['precio']
             self.guardar_carrito()
         
+    def inicializarCarrito(self, producto, cant):
+        self.limpiar()
+        self.carrito[producto.pk] = {
+                "producto_id" : producto.pk,
+                "nombre": producto.nombre,
+                "acumulado": producto.precio * cant,
+                "precio": producto.precio,
+                "cantidad": cant
+        }
+        self.guardar_carrito()

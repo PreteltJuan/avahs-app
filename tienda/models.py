@@ -44,13 +44,46 @@ class Usuario(User):
         return self.primer_nombre
 
 
+class Carrito(models.Model):
+    idCarrito = models.AutoField(primary_key=True, null=False), 
+    idUsuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    total = models.IntegerField(default=0)
+    fecha = models.DateField(null=True)
+    def __str__(self):
+        return str(self.idCarrito)
+
+
+class DetalleCarrito(models.Model):
+    idCarrito =  models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    idProducto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    precio = models.IntegerField(default=0)
+    cantidad = models.IntegerField(default=0)
+    subTotal =  models.IntegerField(default=0)
+    def __str__(self):
+        return str(self.idProducto)
+
+
+class Favorito(models.Model):
+    idFavorito = models.AutoField(primary_key=True, null=False), 
+    idUsuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha = models.DateField(null=True)
+    def __str__(self):
+        return str(self.idFavorito)
+
+class DetalleFavorito(models.Model):
+    idFavorito =  models.ForeignKey(Favorito, on_delete=models.CASCADE)
+    idProducto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.idFavorito)
+
+
 class Factura(models.Model):
     idFactura = models.AutoField(primary_key=True, null=False), 
     idUsuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
     total = models.IntegerField(default=0)
     fecha = models.DateField(null=True)
     def __str__(self):
-        return self.idFactura
+        return str(self.idFactura)
 
 class DetalleFactura(models.Model):
     idFactura =  models.ForeignKey(Factura, on_delete=models.CASCADE)
@@ -59,7 +92,7 @@ class DetalleFactura(models.Model):
     cantidad = models.IntegerField(default=0)
     subTotal =  models.IntegerField(default=0)
     def __str__(self):
-        return self.nombre
+        return  str(self.idProducto)
 
     
 opciones_consultas =[

@@ -39,3 +39,12 @@ class Favorito:
         if id in self.favoritos:
             del self.favoritos[id]
             self.guardar_favoritos()
+
+    def inicializarFavorito(self, producto):
+        self.limpiar()
+        id = str(producto.id)
+        self.favoritos[id] = {
+                "nombre": producto.nombre,
+                "precio": producto.precio,
+        }
+        self.guardar_carrito()

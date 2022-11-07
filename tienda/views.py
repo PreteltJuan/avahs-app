@@ -2,9 +2,11 @@
 from symbol import return_stmt
 from django.shortcuts import render, redirect
 from datetime import date
+
+from requests import delete
 from .favorito import Favorito
 from .carrito import Carrito
-from .models import DetalleFactura, Producto, Usuario, Factura
+from .models import DetalleCarrito, DetalleFavorito, DetalleFactura, Producto, Usuario, Factura, Carrito as CarritoBD, Favorito as FavoritoBD
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 
@@ -49,34 +51,6 @@ def resultados(request):
     } 
     return  render(request, "pages/resultados.html", data)
 
-def contacto(request):
-    data = {
-        'form': formularioContacto()
-    }
-    if request.method == 'POST':
-        formulario = formularioContacto(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"]="mensaje enviado"
-        else:
-            data["form"]= formulario
-            
-    return render(request, 'pages/contacto.html',data)
-
-def calificar(request):
-    data = {
-        'form': calificacion()
-    }
-    if request.method == 'POST':
-        formulario = calificacion(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"]="Reseña enviada"
-        else:
-            data["form"]= formulario
-            
-    return render(request, 'pages/calificar.html',data)
-
 
 
 def login(request):
@@ -92,6 +66,23 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             userlogin(request, user)
+
+            carritoCompras = Carrito(request)
+            favoritosUsuario = Favorito(request)
+            try:
+                carrito = CarritoBD.objects.get(idUsuario=user)
+                favorito = FavoritoBD.objects.get(idUsuario = user)
+                detallesCarrito = DetalleCarrito.objects.filter(idCarrito = carrito)
+                detallesFavorito = DetalleFavorito.objects.filter(idFavorito = favorito)
+                for detalle in detallesCarrito:
+                    carritoCompras.inicializarCarrito(detalle.idProducto, detalle.cantidad)
+                for detalle in detallesFavorito:
+                    favoritosUsuario.inicializarFavorito(detalle.idProducto)
+            except:
+                print("Sin registros")
+
+
+
             return redirect("home")
         else:
             error = True
@@ -101,7 +92,53 @@ def login(request):
     })
 
 def logout(request):
+
+    usuario = Usuario.objects.get(username=request.user)
+    carritoCompras = Carrito(request)
+    favoritosUsuario = Favorito(request)
+
+
+    try:
+        CarritoBD.objects.get(idUsuario = usuario).delete()
+        FavoritoBD.objects.get(idUsuario = usuario).delete()
+    except:
+        print("Record doesn't exists")
+    
+    
+    carrito = CarritoBD(
+        idUsuario = usuario,
+        total = carritoCompras.subTotal,
+        fecha = date.today())
+    carrito.save()
+    favorito = FavoritoBD(
+        idUsuario = usuario,
+        fecha = date.today())
+    favorito.save()
+
+    for key,value in favoritosUsuario.favoritos.items():
+        producto = Producto.objects.get(id = key)
+        detalleFavorito =  DetalleFavorito(
+            idFavorito = favorito,
+            idProducto = producto,
+        )
+        detalleFavorito.save()
+    
+    for key,value in carritoCompras.carrito.items():
+        producto = Producto.objects.get(id = key)
+        detallerCarrito =  DetalleCarrito(
+            idCarrito = carrito,
+            idProducto = producto,
+            precio = producto.precio,
+            cantidad = value["cantidad"],
+            subTotal = value["acumulado"],
+        )
+        detallerCarrito.save()
+
+    carritoCompras.limpiar()
+
+
     userlogout(request)
+
     return redirect("login")
 
 def registro(request):
