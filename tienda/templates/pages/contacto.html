@@ -9,21 +9,31 @@
 
 <main>
       <div class="container">
-        <form action="{% url 'contacto'%}" method="POST">
+        <form action="{% url 'contacto'%}" method="POST" id="formulario">
           {% csrf_token %}
           <h1>Contactanos</h1>
-          <input type="text" name="nombre" value="{% if request.user.is_authenticated %}{{request.user.username}}{% endif %}" placeholder="Nombre">
-          <input type="text" name="correo" placeholder="Correo">
-          <select name="consulta" id="consulta">
-            <option value="Consulta" name="consulta">Consulta</option>
-            <option value="Reclamo" name="consulta">Reclamo</option>
-            <option value="Sugerencia" name="consulta">Sugerencia</option>
-          </select>
-          <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
+          identificado como:
+           <input type="text" name="nombre" value="{% if request.user.is_authenticated %}{{request.user.username}}{% endif %}" placeholder="Nombre"><br>
+         <!-- <input type="text" name="correo" placeholder="Correo"><br>
+           <select name="consulta" >
+            <option value="Consulta" name="consulta">Consulta</option><br>
+            <option value="Reclamo" name="consulta">Reclamo</option><br>
+            <option value="Sugerencia" name="consulta">Sugerencia</option><br>
+          </select><br>
+          <textarea name="mensaje" id="" cols="30" rows="10" placeholder="Mensaje"></textarea><br> -->
+          {{form}}
+          
           <input type="submit" value="Enviar Mensaje" class="button">
     </form>
-    
-  </div>
+
+  {% if request.method == 'POST' %}
+    <div class="mensaje">
+
+       {{mensaje}}
+    </div>
+    {% endif %}
+    </div>
+
 
 
 
