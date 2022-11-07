@@ -73,7 +73,6 @@ class Contacto(models.Model):
     correo = models.EmailField()
     consulta = models.IntegerField(choices=opciones_consultas)
     mensaje = models.TextField()
-    avisos = models.BooleanField()
     def _str_(self):
         return self.nombre
 
