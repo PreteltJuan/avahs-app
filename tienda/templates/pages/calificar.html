@@ -97,7 +97,13 @@
       </div>
       
       <br>
-      <div class="mensaje">{{mensaje}}</div>
+      {% if request.method == 'POST' %}
+    <div class="mensaje">
+
+       {{mensaje}}
+    </div>
+    {% endif %}
+    </div>
         
     </form>
     
