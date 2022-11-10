@@ -51,6 +51,9 @@
           {% endif %}
 
           <span onclick="manejarMenuFavoritos()" id="favorite-btn" class="material-symbols-outlined icons">favorite</span>
+          {% if request.user.is_staff %}
+          <a href="{%url "analitica"%}"><span class="material-symbols-outlined icons">wysiwyg</span></a>
+          {% endif %}
           <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           
         </div>
@@ -175,5 +178,7 @@
     </footer>
     <script src="{% static "scripts/base.js" %}"></script>
     <script src="{% static "scripts/carrito.js" %}"></script>
+    {%block extraScript%}
+    {% endblock %}
   </body>
 </html>

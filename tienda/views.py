@@ -261,7 +261,7 @@ def realizar_compra(request):
 
     factura = Factura(
         idUsuario = usuario,
-        total = carritoCompras.subTotal,
+        precio = carritoCompras.subTotal,
         fecha = date.today())
     factura.save()
     for key,value in carritoCompras.carrito.items():
@@ -280,3 +280,8 @@ def realizar_compra(request):
     carritoCompras.limpiar()
     
     return render(request, "pages/compra.html", {'estado': 1} )
+
+
+def analitica(request):
+    facturas = Factura.objects.all()
+    return render(request, "pages/analitica.html", {"facturas": facturas})

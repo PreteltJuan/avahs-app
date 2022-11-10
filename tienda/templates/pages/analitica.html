@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h1>ANALÍTICA</h1>
+    <p style="font-size:16px">Barrios con más productos comprados</p>
+    <div>
+        <canvas id="chart"></canvas>
+    </div>
+    <p style="font-size:16px; margin-top: 40px">Sexo que más compra</p>
+    <div>
+        <canvas id="chart2"></canvas>
+    </div>
+    <p style="font-size:16px; margin-top: 40px">Edades que más compran</p>
+    <div>
+        <canvas id="chart3"></canvas>
+    </div>
+    <p style="font-size:16px; margin-top: 40px">Usuarios que más compran</p>
+    <div>
+        <canvas id="chart4"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{%block extraScript%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const colores = ["red", "blue", "green", "yellow", "purple", "aqua", "pink", "orange", "violet", "brown"]
+
+    window.facturas = [
+        {% for factura in facturas %}{
+            usuario: "{{factura.idUsuario.username}}",
+            precio: {{factura.precio}},
+            barrio: "{{factura.idUsuario.barrio}}",
+            cantidadProductos: {{factura.productos_comprados.all|length}},
+            sexo: "{{factura.idUsuario.sexo}}",
+            edad: {{factura.idUsuario.edad}}
+        },
+        {% endfor %}
+    ]
+
+    const prepararBarrios = () => {
+        const barrios = new Map()
+        for (const factura of facturas){
+            const {barrio, cantidadProductos} = factura
+
+            if (!barrios.has(barrio)){
+                barrios.set(barrio, cantidadProductos)
+            }else{
+                const cantidadPrevia = barrios.get(barrio)
+                barrios.set(barrio, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasBarriosIterador = barrios.entries()
+        const tuplasBarrios = [...tuplasBarriosIterador]
+        tuplasBarrios.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const barriosMasComprados = tuplasBarrios.slice(0, 10)
+        return barriosMasComprados
+    }
+    
+    const prepararSexos = () => {
+        const sexos = new Map()
+        for (const factura of facturas){
+            const {sexo, cantidadProductos} = factura
+
+            if (!sexos.has(sexo)){
+                sexos.set(sexo, cantidadProductos)
+            }else{
+                const cantidadPrevia = sexos.get(sexo)
+                sexos.set(sexo, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasSexosIterador = sexos.entries()
+        const tuplasSexos = [...tuplasSexosIterador]
+        tuplasSexos.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const sexosMasComprados = tuplasSexos.slice(0, 3)
+        return sexosMasComprados
+    }
+
+    const prepararEdades = () => {
+        const edades = new Map()
+        for (const factura of facturas){
+            const {edad, cantidadProductos} = factura
+
+            if (!edades.has(edad)){
+                edades.set(edad, cantidadProductos)
+            }else{
+                const cantidadPrevia = edades.get(edad)
+                edades.set(edad, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasEdadesIterador = edades.entries()
+        const tuplasEdades = [...tuplasEdadesIterador]
+        tuplasEdades.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const edadesMasCompradas = tuplasEdades.slice(0, 10)
+        return edadesMasCompradas
+    }
+
+    const prepararUsuarios = () => {
+        const usuarios = new Map()
+        for (const factura of facturas){
+            const {usuario, cantidadProductos} = factura
+
+            if (!usuarios.has(usuario)){
+                usuarios.set(usuario, cantidadProductos)
+            }else{
+                const cantidadPrevia = usuarios.get(usuario)
+                usuarios.set(usuario, cantidadPrevia + cantidadProductos)
+            }
+        }
+
+        const tuplasUsuariosIterador = usuarios.entries()
+        const tuplasUsuarios = [...tuplasUsuariosIterador]
+        tuplasUsuarios.sort((a, b) => b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0)
+        const usuariosMasComprados = tuplasUsuarios.slice(0, 5)
+        console.log(usuariosMasComprados)
+        return usuariosMasComprados
+    }
+
+    const crearPrimeraGrafica = (datos) => {
+        const canvas = document.querySelector("#chart")
+        const data = {
+            labels: datos.map(([barrio]) => barrio),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'doughnut',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+    const crearSegundaGrafica = (datos) => {
+        const canvas = document.querySelector("#chart2")
+        const data = {
+            labels: datos.map(([sexo]) => sexo),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'doughnut',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+    const crearTerceraGrafica = (datos) => {
+        const canvas = document.querySelector("#chart3")
+        const data = {
+            labels: datos.map(([edad]) => edad),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'doughnut',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+    const crearCuartaGrafica = (datos) => {
+        const canvas = document.querySelector("#chart4")
+        const data = {
+            labels: datos.map(([usuario]) => usuario),
+            datasets: [{
+                data: datos.map(([_,cantidad]) => cantidad),
+                backgroundColor: colores
+            }]
+        }
+        const config = {
+            type: 'pie',
+            data
+        }
+        const chart = new Chart(canvas, config)
+
+        chart.canvas.parentNode.style.height = '600px';
+        chart.canvas.parentNode.style.width = '600px';
+    }
+
+
+
+    const datos1 = prepararBarrios() 
+    crearPrimeraGrafica(datos1)
+
+    const datos2 = prepararSexos()
+    crearSegundaGrafica(datos2)
+
+    const datos3 = prepararEdades()
+    crearTerceraGrafica(datos3)
+
+    const datos4 = prepararUsuarios()
+    crearCuartaGrafica(datos4)
+
+</script>
+{% endblock %}
+

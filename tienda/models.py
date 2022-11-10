@@ -2,6 +2,7 @@ from distutils.command.upload import upload
 from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 class Producto(models.Model):
@@ -39,6 +40,11 @@ class Usuario(User):
     @property
     def correo(self):
         return self.email
+    
+    @property
+    def edad(self):
+        today = datetime.datetime.now()
+        return today.year - self.fecha_nacimiento.year
 
     def __str__(self):
         return self.primer_nombre
@@ -80,7 +86,7 @@ class DetalleFavorito(models.Model):
 class Factura(models.Model):
     idFactura = models.AutoField(primary_key=True, null=False), 
     idUsuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    total = models.IntegerField(default=0)
+    precio = models.IntegerField(default=0)
     fecha = models.DateField(null=True)
     def __str__(self):
         return str(self.idFactura)
@@ -120,3 +126,11 @@ class calificar(models.Model):
     def _str_(self):
         return self.name
 
+
+
+
+class ProductoComprado(models.Model):
+    idProductoComprado = models.AutoField(primary_key=True)
+    idProducto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    idFactura = models.ForeignKey(Factura, related_name="productos_comprados", on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=0)
