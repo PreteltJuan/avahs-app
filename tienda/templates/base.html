@@ -56,7 +56,9 @@
           <a href="{%url "login"%}"><span class="material-symbols-outlined icons">person</span></a>
           {% endif %}
 
+          {% if request.user.is_staff %}
           <a href="{%url "analitica"%}"><span class="material-symbols-outlined icons">favorite</span></a>
+          {% endif %}
 
           <a href="{%url "carrito"%}"><span class="material-symbols-outlined icons">local_mall  </span></a>
           
@@ -101,8 +103,8 @@
           <div class="follow-us">
             <span>Siguenos en:</span>
             <div class="social-icons">
-                <a href="http://"><img src="{% static "images/icon-instagram.svg" %}"/></a>
-                <a href="http://"><img src="{% static "images/icon-facebook.svg" %}"/></a>
+                <a href="https://www.instagram.com/avahs_oficial/"><img src="{% static "images/icon-instagram.svg" %}"/></a>
+                <a href="https://www.instagram.com/avahs_oficial/"><img src="{% static "images/icon-facebook.svg" %}"/></a>
             </div>
           </div>
         </div>
