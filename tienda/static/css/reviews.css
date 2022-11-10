@@ -1,78 +1,72 @@
-.box{
-    text-align: center;
-    font-size: 15px;
-    border: bold;
-    border-style: bold;
-    flex-basis: 25%;
-    background-color: gray;
-    margin: 0;
-    padding: 0;
-    color: black;
+*{
+  box-sizing: border-box;
+  font-family: 'Comfortaa';
+  font-size: large;
+}
+
+.header{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 20vh;
+  position: sticky;
+  top: 0px;
+  background-color: var(--color2);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
 }
 
 .mensaje{
-    border: bold;
-    border-style: bold;
-    flex-basis: 25%;
-    background-color: black;
-    margin: 0;
-    padding: 0;
-    font-size: 18rem;
-    color: white;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  background:  #A2708A;
+  border: 2px solid black;
+  border-radius: 7px;
+  margin: 10px 0;
 }
 
-label {
-    color: black;
-
+.container{
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
 }
 
-.rate > input{
-    display: none;
-  }
+section{
+  border: 2px solid #5624d0;
+  border-radius: 7px;
+  margin: 10px 0;
+  background: #fff;
+}
 
-  .rate{
-    display: inline-block;
-    ;
-    border: 0;
-  }
-
-  .rate > label{
-    float: right;
-  }
-
-  .rate > label:before{
-    display: inline-block;
-    font-size: 25rem;
-    font-family: FontAwesome;
-    content: "\f005";
-    margin: 0;
-    padding: 0.3 rem .2rem;
-  }
-
-  .rate .half::before{
-    content: "\f089";
-    position: absolute;
-    padding-right:0;
-  }
-
-  input:checked ~ label, label:hover ~ label{
-    color: #ffb503
-  }
-
-  input:checked + label:hover, input:checked ~ label:hover, input:checked ~ label:hover ~ label,
-  label:hover ~ input:checked ~ label{
-    color: #cc9000;
-  }
-
-
-  .boton{
-    height: 40px;
-    width: 70%;
-    border-radius: 4px;
-    border: 1px solid rgb(206, 212, 218);
-    font-size: 18rem;
-    background-color: #3e5264;
-    margin: 32px 0px;
-    color: rgb(255, 255, 255);
-  }
-  
+label{
+  display: block;
+  padding: 7px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px dashed #ccc;
+  background: #F8BFC2;
+  margin-bottom: 3px;
+}
+label:hover{
+  background:  #A2708A;
+}
+.button{
+  width: 80%;
+  display: block;
+  margin: auto;
+  padding: 10px;
+  background-color: #f2e3da;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.button:hover{
+  background: #000;
+  color: #fff;
+}
+h2{
+  text-align: center;
+}

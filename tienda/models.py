@@ -112,17 +112,15 @@ class Contacto(models.Model):
     correo = models.EmailField()
     consulta = models.IntegerField(choices=opciones_consultas)
     mensaje = models.TextField()
-    avisos = models.BooleanField()
     def _str_(self):
         return self.nombre
 
-class calificar(models.Model):
-    rating = models.FloatField(default=0)
+class Review(models.Model):
+    p0 = models.FloatField(default=0)
+    p1 = models.FloatField(default=0)
+    p2 = models.FloatField(default=0)
     name = models.CharField(max_length=100)
     review = models.TextField(max_length=500, blank=True)
-    status = models.BooleanField(default=True)
-    """ created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True) """
     def _str_(self):
         return self.name
 

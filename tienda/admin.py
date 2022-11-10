@@ -3,7 +3,7 @@ from django.contrib import admin
 from tienda.favorito import Favorito
 from .models import DetalleCarrito, DetalleFavorito, Factura, Producto, Usuario, DetalleFactura, Carrito, Favorito
 from .models import Contacto
-from .models import calificar
+from .models import Review
 # Register your models here.
 
 
@@ -27,6 +27,6 @@ admin.site.register(DetalleFactura, DetalleFacturaAdmin)
 admin.site.register(Contacto)
 admin.site.register(Carrito)
 admin.site.register(DetalleCarrito)
-admin.site.register(calificar)
+admin.site.register(Review)
 admin.site.register(DetalleFavorito)
 admin.site.register(Favorito)

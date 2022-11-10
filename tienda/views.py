@@ -1,12 +1,13 @@
 
-from symbol import return_stmt
+
 from django.shortcuts import render, redirect
+from .forms import formularioContacto, calificacion
 from datetime import date
 
 from requests import delete
 from .favorito import Favorito
 from .carrito import Carrito
-from .models import DetalleCarrito, DetalleFavorito, DetalleFactura, Producto, Usuario, Factura, Carrito as CarritoBD, Favorito as FavoritoBD
+from .models import DetalleCarrito, DetalleFavorito, DetalleFactura, Producto, Usuario, Factura, Carrito as CarritoBD, Favorito as FavoritoBD, Contacto, Review
 from django.contrib.auth import authenticate, login as userlogin, logout as userlogout, get_user_model
 
 
@@ -16,8 +17,9 @@ def home(request):
     data = {
         'lista_productos': productos,
         'items': cant_items
-    } 
+    }
     return render(request, "pages/home.html", data)
+
 
 def novedades(request):
     productos = Producto.objects.filter(nuevo=True)
@@ -25,8 +27,9 @@ def novedades(request):
     data = {
         'lista_productos': productos,
         'items': cant_items
-    } 
+    }
     return render(request, "pages/secciones/novedades.html", data)
+
 
 def descuentos(request):
     productos = Producto.objects.filter(descuento=True)
@@ -34,12 +37,13 @@ def descuentos(request):
     data = {
         'lista_productos': productos,
         'items': cant_items
-    } 
+    }
     return render(request, "pages/secciones/descuentos.html", data)
 
 
 def tendencias(request):
     return render(request, "pages/secciones/tendencias.html")
+
 
 def resultados(request):
     text = request.GET.get('search', '')
@@ -48,9 +52,44 @@ def resultados(request):
     data = {
         'productos': producto,
         'items': items,
-    } 
-    return  render(request, "pages/resultados.html", data)
+    }
+    return render(request, "pages/resultados.html", data)
 
+
+def contacto(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    data = {
+        'form': formularioContacto()
+    }
+    if request.method == 'POST':
+        formulario = formularioContacto(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Enviado"
+        else:
+            data["form"] = formulario
+
+    return render(request, 'pages/contacto.html', data)
+
+
+def calificar(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    data = {
+        'form': calificacion()
+    }
+    if request.method == 'POST':
+        formulario = calificacion(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Reseña enviada"
+        else:
+            data["form"] = formulario
+
+    return render(request, 'pages/calificar.html', data)
 
 
 def login(request):
@@ -71,17 +110,18 @@ def login(request):
             favoritosUsuario = Favorito(request)
             try:
                 carrito = CarritoBD.objects.get(idUsuario=user)
-                favorito = FavoritoBD.objects.get(idUsuario = user)
-                detallesCarrito = DetalleCarrito.objects.filter(idCarrito = carrito)
-                detallesFavorito = DetalleFavorito.objects.filter(idFavorito = favorito)
+                favorito = FavoritoBD.objects.get(idUsuario=user)
+                detallesCarrito = DetalleCarrito.objects.filter(
+                    idCarrito=carrito)
+                detallesFavorito = DetalleFavorito.objects.filter(
+                    idFavorito=favorito)
                 for detalle in detallesCarrito:
-                    carritoCompras.inicializarCarrito(detalle.idProducto, detalle.cantidad)
+                    carritoCompras.inicializarCarrito(
+                        detalle.idProducto, detalle.cantidad)
                 for detalle in detallesFavorito:
                     favoritosUsuario.inicializarFavorito(detalle.idProducto)
             except:
                 print("Sin registros")
-
-
 
             return redirect("home")
         else:
@@ -91,58 +131,61 @@ def login(request):
         "error": error
     })
 
+
 def logout(request):
 
-    usuario = Usuario.objects.get(username=request.user)
+    usuario = None
     carritoCompras = Carrito(request)
     favoritosUsuario = Favorito(request)
-
-
     try:
-        CarritoBD.objects.get(idUsuario = usuario).delete()
-        FavoritoBD.objects.get(idUsuario = usuario).delete()
+        usuario = Usuario.objects.get(username=request.user)
+
+        try:
+            CarritoBD.objects.get(idUsuario=usuario).delete()
+            FavoritoBD.objects.get(idUsuario=usuario).delete()
+        except:
+            print("Usuario sin registro anterior")
+        carrito = CarritoBD(
+            idUsuario=usuario,
+            total=carritoCompras.subTotal,
+            fecha=date.today())
+        carrito.save()
+        favorito = FavoritoBD(
+            idUsuario=usuario,
+            fecha=date.today())
+        favorito.save()
+
+        for key, value in favoritosUsuario.favoritos.items():
+            producto = Producto.objects.get(id=key)
+            detalleFavorito = DetalleFavorito(
+                idFavorito=favorito,
+                idProducto=producto,
+            )
+            detalleFavorito.save()
+
+        for key, value in carritoCompras.carrito.items():
+            producto = Producto.objects.get(id=key)
+            detallerCarrito = DetalleCarrito(
+                idCarrito=carrito,
+                idProducto=producto,
+                precio=producto.precio,
+                cantidad=value["cantidad"],
+                subTotal=value["acumulado"],
+            )
+            detallerCarrito.save()
+
+        carritoCompras.limpiar()
     except:
-        print("Record doesn't exists")
+        print("Posiblemente usuario admin")
     
-    
-    carrito = CarritoBD(
-        idUsuario = usuario,
-        total = carritoCompras.subTotal,
-        fecha = date.today())
-    carrito.save()
-    favorito = FavoritoBD(
-        idUsuario = usuario,
-        fecha = date.today())
-    favorito.save()
-
-    for key,value in favoritosUsuario.favoritos.items():
-        producto = Producto.objects.get(id = key)
-        detalleFavorito =  DetalleFavorito(
-            idFavorito = favorito,
-            idProducto = producto,
-        )
-        detalleFavorito.save()
-    
-    for key,value in carritoCompras.carrito.items():
-        producto = Producto.objects.get(id = key)
-        detallerCarrito =  DetalleCarrito(
-            idCarrito = carrito,
-            idProducto = producto,
-            precio = producto.precio,
-            cantidad = value["cantidad"],
-            subTotal = value["acumulado"],
-        )
-        detallerCarrito.save()
-
-    carritoCompras.limpiar()
-
 
     userlogout(request)
 
     return redirect("login")
 
+
 def registro(request):
-    error=False
+    error = False
     nombre_campos = [
         "primer_nombre",
         "segundo_nombre",
@@ -165,15 +208,16 @@ def registro(request):
     crear_usuario = campos.get("nombre_usuario")
     if crear_usuario:
         campos.update({
-            "first_name":campos.get("primer_nombre"),
-            "last_name":campos.get("primer_apellido"),
-            "username":campos.get("nombre_usuario"),
-            "email":campos.get("correo"),
-            "password":campos.get("clave"),
-            "fecha_nacimiento":campos.get("fecha")
+            "first_name": campos.get("primer_nombre"),
+            "last_name": campos.get("primer_apellido"),
+            "username": campos.get("nombre_usuario"),
+            "email": campos.get("correo"),
+            "password": campos.get("clave"),
+            "fecha_nacimiento": campos.get("fecha")
         })
 
-        borrar_campos = ("primer_nombre","primer_apellido","nombre_usuario","correo","clave","fecha")
+        borrar_campos = ("primer_nombre", "primer_apellido",
+                         "nombre_usuario", "correo", "clave", "fecha")
 
         for campo in borrar_campos:
             campos.pop(campo, None)
@@ -186,28 +230,31 @@ def registro(request):
         else:
             error = True
 
-    return render(request, "pages/registro_login/registro.html", {"error":error})
+    return render(request, "pages/registro_login/registro.html", {"error": error})
 
-def producto(request, nombre_p ):
+
+def producto(request, nombre_p):
     producto = Producto.objects.get(nombre=nombre_p)
     data = {
         'producto': producto,
-    } 
-    return  render(request, "pages/producto.html", data)
+    }
+    return render(request, "pages/producto.html", data)
+
 
 def carrito(request):
-    return  render(request, "pages/carrito.html")
+    return render(request, "pages/carrito.html")
+
 
 def compra(request):
     if not request.user.is_authenticated:
         return redirect("login")
-    
+
     usuario = Usuario.objects.get(username=request.user)
-    
+
     data = {
         'usuario': usuario,
-    } 
-    return render(request, "pages/compra.html", data )
+    }
+    return render(request, "pages/compra.html", data)
 
 
 def agregar_producto_carrito(request, producto_id):
@@ -215,6 +262,7 @@ def agregar_producto_carrito(request, producto_id):
     producto = Producto.objects.get(pk=producto_id)
     carritoCompras.agregar(producto)
     return redirect("carrito")
+
 
 def agregar_producto_favoritos(request, producto_id):
     favoritos = Favorito(request)
@@ -224,10 +272,12 @@ def agregar_producto_favoritos(request, producto_id):
     producto.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
+
 def limpiar_carrito(request):
     carritoCompras = Carrito(request)
     carritoCompras.limpiar()
     return redirect("carrito")
+
 
 def eliminar_producto_carrito(request, producto_id):
     carrito = Carrito(request)
@@ -235,51 +285,54 @@ def eliminar_producto_carrito(request, producto_id):
     carrito.eliminar(producto)
     return redirect("carrito")
 
+
 def eliminar_producto_favoritos(request, producto_id):
     favoritos = Favorito(request)
     producto = Producto.objects.get(id=producto_id)
     favoritos.eliminar(producto)
     return redirect(request.META.get('HTTP_REFERER'))
 
+
 def actualizar_carrito(request):
     carro = Carrito(request)
 
     for key in carro.carrito.keys():
-        newCant =  request.GET.get(key, '')
+        newCant = request.GET.get(key, '')
         carro.actualizarCantidad(key, int(newCant))
 
     carro.actualizarSubTotal()
     return redirect("carrito")
-    
+
+
 def realizar_compra(request):
     usuario = Usuario.objects.get(username=request.user)
     carritoCompras = Carrito(request)
-    for key,value in carritoCompras.carrito.items():
-        producto = Producto.objects.get(id = key)
+    for key, value in carritoCompras.carrito.items():
+        producto = Producto.objects.get(id=key)
         if producto.unidades < value["cantidad"]:
-            return render(request, "pages/compra.html", {'estado': 2} )
+            return render(request, "pages/compra.html", {'estado': 2})
 
     factura = Factura(
-        idUsuario = usuario,
-        precio = carritoCompras.subTotal,
-        fecha = date.today())
+        idUsuario=usuario,
+        precio=carritoCompras.subTotal,
+        fecha=date.today())
     factura.save()
-    for key,value in carritoCompras.carrito.items():
-        producto = Producto.objects.get(id = key)
+    for key, value in carritoCompras.carrito.items():
+        producto = Producto.objects.get(id=key)
         producto.unidades -= value["cantidad"]
-        detallerFactura =  DetalleFactura(
-            idFactura = factura,
-            idProducto = producto,
-            precio = producto.precio,
-            cantidad = value["cantidad"],
-            subTotal = value["acumulado"],
+        detallerFactura = DetalleFactura(
+            idFactura=factura,
+            idProducto=producto,
+            precio=producto.precio,
+            cantidad=value["cantidad"],
+            subTotal=value["acumulado"],
         )
         detallerFactura.save()
         producto.save()
-    
+
     carritoCompras.limpiar()
-    
-    return render(request, "pages/compra.html", {'estado': 1} )
+
+    return render(request, "pages/compra.html", {'estado': 1})
 
 
 def analitica(request):
